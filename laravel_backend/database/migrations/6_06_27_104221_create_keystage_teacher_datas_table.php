@@ -19,6 +19,10 @@ return new class extends Migration
 
 
             $table->unsignedInteger('keystage_id');
+            $table->foreign('keystage_id')
+                ->references('id')
+                ->on('keystage')
+                ->onDelete('cascade');
 
             $table->unsignedInteger('teacher_profile_id');
             $table->foreign('teacher_profile_id')

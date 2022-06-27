@@ -18,6 +18,10 @@ return new class extends Migration
 
 
             $table->unsignedInteger('subject_id');
+            $table->foreign('subject_id')
+                ->references('id')
+                ->on('subjects')
+                ->onDelete('cascade');
 
             $table->unsignedInteger('teacher_profile_id');
             $table->foreign('teacher_profile_id')
