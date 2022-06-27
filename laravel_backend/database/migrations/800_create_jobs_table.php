@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration 
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -15,9 +15,12 @@ return new class extends Migration
     {
         Schema::create('jobs', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('date');
+            $table->string('time_boundries');
+            $table->timestamps();
 
             $table->integer('teacher_id')->unsigned();
-            $table->foreign('teacher_id')->references('id')->on('teacher_datas')->onDelete('cascade');
+            $table->foreign('teacher_id')->references('id')->on('teachers_data')->onDelete('cascade');
 
             $table->integer('subject_id')->unsigned();
             $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
@@ -27,14 +30,6 @@ return new class extends Migration
 
             $table->integer('school_id')->unsigned();
             $table->foreign('school_id')->references('id')->on('schools')->onDelete('cascade');
-
-
-            $table->string('date');
-
-            $table->string('time_boundries');
-
-
-            $table->timestamps();
         });
     }
 
