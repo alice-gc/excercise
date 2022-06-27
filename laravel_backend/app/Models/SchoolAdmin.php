@@ -10,7 +10,7 @@ class School_admin extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'address'
+        'user_id',
+        'school_id'
     ];
 }

@@ -10,10 +10,10 @@ class Jobs extends Model
     use HasFactory;
 
     protected $fillable = [
-        'school',
-        'subject',
-        'keystage',
+        'school_id',
+        'subject_id',
+        'keystage_id',
         'date',
-        'teacher'
+        'user_id'
     ];
 }

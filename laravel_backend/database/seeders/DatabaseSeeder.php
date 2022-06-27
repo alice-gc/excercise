@@ -23,9 +23,6 @@ class DatabaseSeeder extends Seeder
             SchoolSeeder::class,
             SubjectSeeder::class,
             TeacherDataSeeder::class,
-            TeacherKeystageDataSeeder::class,
-            TeacherSubjectDataSeeder::class,
-            TeacherTravelDistanceSeeder::class,
             UserSeeder::class
         ]);
     }
