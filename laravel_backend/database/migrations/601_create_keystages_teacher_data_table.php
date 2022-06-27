@@ -13,20 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('teachers_data', function (Blueprint $table) {
+        Schema::create('keystages_teacher_data', function (Blueprint $table) {
             $table->increments('id');
-            ;
-
-            $table->unsignedInteger('user_id');
-
-            $table->foreign('user_id')
+            $table->integer('keystage_id')->unsigned();
+            $table->foreign('keystage_id')->references('id')->on('keystages')->onDelete('cascade');
+            $table->unsignedInteger('teacher_profile_id');
+            $table->foreign('teacher_profile_id')
                 ->references('id')
-                ->on('users')
+                ->on('teacher_data')
                 ->onDelete('cascade');
-
-            $table->string('address');
-            $table->string('teacher_preferences');
-
             $table->timestamps();
         });
     }
@@ -38,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('teachers_data');
+        Schema::dropIfExists('teachers_keystage_data');
     }
 };

@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Jobs extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'school',
+        'subject',
+        'keystage',
+        'date',
+        'teacher'
+    ];
 }
