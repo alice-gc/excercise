@@ -14,20 +14,14 @@ return new class extends Migration
     public function up()
     {
         Schema::create('school_admins', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
 
 
-            $table->unsignedInteger('user_id');
-            $table->foreign('user_id')
-                ->references('id')
-                ->on('users')
-                ->onDelete('cascade');
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
-            $table->unsignedInteger('school_id');
-            $table->foreign('school_id')
-                ->references('id')
-                ->on('schools')
-                ->onDelete('cascade');
+            $table->integer('school_id')->unsigned();
+            $table->foreign('school_id')->references('id')->on('schools')->onDelete('cascade');
 
 
             $table->timestamps();

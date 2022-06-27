@@ -14,13 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('distance_teacher_datas', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
 
-            $table->unsignedInteger('distance_id');
-            $table->foreign('distance_id')
-                ->references('id')
-                ->on('distances')
-                ->onDelete('cascade');
+            $table->integer('distance_id')->unsigned();
+
+            $table->foreign('distance_id')->references('id')->on('distances')->onDelete('cascade');
 
             $table->unsignedInteger('teacher_profile_id');
             $table->foreign('teacher_profile_id')

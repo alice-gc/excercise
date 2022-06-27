@@ -14,15 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('keystage_teacher_datas', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
 
+            $table->integer('keystage_id')->unsigned();
 
-
-            $table->unsignedInteger('keystage_id');
-            $table->foreign('keystage_id')
-                ->references('id')
-                ->on('keystage')
-                ->onDelete('cascade');
+            $table->foreign('keystage_id')->references('id')->on('keystages')->onDelete('cascade');
 
             $table->unsignedInteger('teacher_profile_id');
             $table->foreign('teacher_profile_id')

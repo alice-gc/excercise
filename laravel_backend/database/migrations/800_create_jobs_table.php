@@ -14,34 +14,20 @@ return new class extends Migration
     public function up()
     {
         Schema::create('jobs', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
 
-            $table->unsignedInteger('teacher_profile_id')->nullable();
-            $table->foreign('teacher_profile_id')
-                ->references('id')
-                ->on('teacher_datas')
-                ->onDelete('cascade');
+            $table->integer('teacher_id')->unsigned();
+            $table->foreign('teacher_id')->references('id')->on('teacher_datas')->onDelete('cascade');
 
-            $table->unsignedInteger('subject_id');
-            $table->foreign('subject_id')
-                ->references('id')
-                ->on('subjects')
-                ->onDelete('cascade');
+            $table->integer('subject_id')->unsigned();
+            $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
 
+            $table->integer('keystage_id')->unsigned();
+            $table->foreign('keystage_id')->references('id')->on('keystages')->onDelete('cascade');
 
+            $table->integer('school_id')->unsigned();
+            $table->foreign('school_id')->references('id')->on('schools')->onDelete('cascade');
 
-            $table->unsignedInteger('keystage_id');
-            $table->foreign('keystage_id')
-                ->references('id')
-                ->on('keystage')
-                ->onDelete('cascade');
-
-
-            $table->unsignedInteger('school_id');
-            $table->foreign('school_id')
-                ->references('id')
-                ->on('schools')
-                ->onDelete('cascade');
 
             $table->string('date');
 
