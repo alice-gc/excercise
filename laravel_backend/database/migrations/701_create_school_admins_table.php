@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+return new class extends Migration 
 {
     /**
      * Run the migrations.
@@ -14,7 +14,16 @@ return new class extends Migration
     public function up()
     {
         Schema::create('school_admins', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
+
+
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
+            $table->integer('school_id')->unsigned();
+            $table->foreign('school_id')->references('id')->on('schools')->onDelete('cascade');
+
+
             $table->timestamps();
         });
     }
