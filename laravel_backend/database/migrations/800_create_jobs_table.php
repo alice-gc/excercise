@@ -20,7 +20,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->integer('teacher_id')->unsigned();
-            $table->foreign('teacher_id')->references('id')->on('teachers_data')->onDelete('cascade');
+            $table->foreign('teacher_id')->references('id')->on('teacher_data')->onDelete('cascade');
 
             $table->integer('subject_id')->unsigned();
             $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');

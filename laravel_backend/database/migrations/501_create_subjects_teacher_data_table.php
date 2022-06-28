@@ -13,17 +13,20 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('teachers_travel_distance', function (Blueprint $table) {
+        Schema::create('subjects_teacher_data', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('distance_id')->unsigned();
 
-            $table->foreign('distance_id')->references('id')->on('distances')->onDelete('cascade');
+            $table->unsignedInteger('subject_id');
+            $table->foreign('subject_id')
+                ->references('id')
+                ->on('subjects')
+                ->onDelete('cascade');
 
             $table->unsignedInteger('teacher_profile_id');
             $table->foreign('teacher_profile_id')
                 ->references('id')
-                ->on('teachers_data')
+                ->on('teacher_data')
                 ->onDelete('cascade');
 
             $table->timestamps();
@@ -37,6 +40,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('teachers_travel_distance');
+        Schema::dropIfExists('teachers_subject_data');
     }
 };

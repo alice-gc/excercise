@@ -19,21 +19,17 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-
             $table->string('preferred_name');
             $table->string('phone');
 
 
             // $table->unsignedBigInteger('role'); //increments
             $table->integer('role_id')->unsigned();
-
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
             // $table->foreign('role')
             //     ->references('id')
             //     ->on('roles')
             //     ->onDelete('cascade');
-
-
             $table->rememberToken();
             $table->timestamps();
         });

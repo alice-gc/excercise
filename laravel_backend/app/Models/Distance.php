@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Distance extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'distance in km',  //need to be nullable
+        'distance in miles'    //need to be nullable
+    ];
 }
