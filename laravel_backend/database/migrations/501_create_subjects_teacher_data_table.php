@@ -13,8 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('subjects_teacher_data', function (Blueprint $table) {
+        Schema::create('subject_user', function (Blueprint $table) {
             $table->increments('id');
+
 
 
             $table->unsignedInteger('subject_id');
@@ -23,10 +24,10 @@ return new class extends Migration
                 ->on('subjects')
                 ->onDelete('cascade');
 
-            $table->unsignedInteger('teacher_profile_id');
-            $table->foreign('teacher_profile_id')
+            $table->unsignedInteger('user_id');
+            $table->foreign('user_id')
                 ->references('id')
-                ->on('teacher_data')
+                ->on('users')
                 ->onDelete('cascade');
 
             $table->timestamps();

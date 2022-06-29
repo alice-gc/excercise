@@ -17,13 +17,19 @@ class RoleSeeder extends Seeder
     {
         $roles = [
             [
-                'type' => 'Super Admin'
+                'type' => 'Platform Admin' //me and alice
             ],
             [
-                'type' => 'School Admin'
+                'type' => 'Super Admin' //LEA?
             ],
             [
-                'type' => 'Supply Teacher'
+                'type' => 'School Admin' //has more permissions than dept admin
+            ],
+            [
+                'type' => 'Department Admin' //can only access the placements for their dept
+            ],
+            [
+                'type' => 'Supply Teacher' //filling the role
             ]
         ];
 

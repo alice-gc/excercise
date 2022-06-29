@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Jobs;
+use App\Http\Requests\StoreJobRequest;
+use App\Models\Job;
 use Illuminate\Http\Request;
 
-class JobsController extends Controller
+class JobController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -33,9 +34,10 @@ class JobsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreJobRequest $request)
     {
-        //
+        $validated = $request->validated();
+        $request->user()->school->jobs()->create($validated);
     }
 
     /**
@@ -44,7 +46,7 @@ class JobsController extends Controller
      * @param  \App\Models\Jobs  $jobs
      * @return \Illuminate\Http\Response
      */
-    public function show(Jobs $jobs)
+    public function show(Job $jobs)
     {
         //
     }
@@ -55,7 +57,7 @@ class JobsController extends Controller
      * @param  \App\Models\Jobs  $jobs
      * @return \Illuminate\Http\Response
      */
-    public function edit(Jobs $jobs)
+    public function edit(Job $jobs)
     {
         //
     }
@@ -67,7 +69,7 @@ class JobsController extends Controller
      * @param  \App\Models\Jobs  $jobs
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Jobs $jobs)
+    public function update(Request $request, Job $jobs)
     {
         //
     }
@@ -78,7 +80,7 @@ class JobsController extends Controller
      * @param  \App\Models\Jobs  $jobs
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Jobs $jobs)
+    public function destroy(Job $jobs)
     {
         //
     }

@@ -1,5 +1,7 @@
-import 'package:blwm_app/school.dart';
 import 'package:flutter/material.dart';
+
+import 'package:blwm_app/request_form.dart';
+import 'package:blwm_app/school.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,11 +13,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Blwm',
+      title: 'School Name',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Blwm'),
+      home: const MyHomePage(title: 'School Name'),
     );
   }
 }
@@ -35,39 +37,32 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Container(
-          child: FutureBuilder<List>(
-        future: schoolService.getAllSchool(),
-        builder: (context, snapshot) {
-          print(snapshot.data);
-          if (snapshot.hasData) {
-            return ListView.builder(
-              itemCount: snapshot.data?.length,
-              itemBuilder: (context, i) {
-                return Card(
-                  child: ListTile(
-                    title: Text(
-                      snapshot.data![i]['name'],
-                      style: TextStyle(fontSize: 30.0),
-                    ),
-                    subtitle: Text(
-                      snapshot.data![i]['address'],
-                      style: TextStyle(fontSize: 20.0),
-                    ),
+        appBar: AppBar(
+          title: Text(widget.title),
+        ),
+        body: Stack(
+          children: [
+            Positioned(
+              bottom: 0,
+              width: MediaQuery.of(context).size.width,
+              child: Center(
+                child: ElevatedButton.icon(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const RequestForm()),
+                    );
+                  },
+                  icon: const Icon(
+                    Icons.add,
+                    size: 24.0,
                   ),
-                );
-              },
-            );
-          } else {
-            return const Center(
-              child: Text('No Data Found'),
-              );
-          }
-        },
-      ),
-    ));
+                  label: const Text('Create Placement'),
+                ),
+              ),
+            ),
+          ],
+        ));
   }
 }

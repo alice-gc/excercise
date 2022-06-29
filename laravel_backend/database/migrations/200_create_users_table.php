@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\CustomRole;
+use App\Models\School;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -21,15 +23,8 @@ return new class extends Migration
             $table->string('password');
             $table->string('preferred_name');
             $table->string('phone');
-
-
-            // $table->unsignedBigInteger('role'); //increments
-            $table->integer('role_id')->unsigned();
-            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
-            // $table->foreign('role')
-            //     ->references('id')
-            //     ->on('roles')
-            //     ->onDelete('cascade');
+            $table->foreignIdFor(School::class)->nullable();
+            $table->foreignIdFor(CustomRole::class);
             $table->rememberToken();
             $table->timestamps();
         });

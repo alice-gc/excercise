@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Role extends Model
+class CustomRole extends Model
 {
     use HasFactory;
 
@@ -14,7 +14,7 @@ class Role extends Model
     ];
 
 
-    public function roles()
+    public function users()
     {
         return $this->belongsTo(User::class);
     }

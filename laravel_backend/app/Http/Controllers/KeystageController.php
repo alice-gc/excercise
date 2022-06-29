@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Schools;
+use App\Models\Keystage;
 use Illuminate\Http\Request;
 
-class SchoolsController extends Controller
+class KeystageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class SchoolsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Schools  $schools
+     * @param  \App\Models\Keystages  $keystages
      * @return \Illuminate\Http\Response
      */
-    public function show(Schools $schools)
+    public function show(Keystage $keystages)
     {
         //
     }
@@ -52,10 +52,10 @@ class SchoolsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Schools  $schools
+     * @param  \App\Models\Keystages  $keystages
      * @return \Illuminate\Http\Response
      */
-    public function edit(Schools $schools)
+    public function edit(Keystage $keystages)
     {
         //
     }
@@ -64,10 +64,10 @@ class SchoolsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Schools  $schools
+     * @param  \App\Models\Keystages  $keystages
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Schools $schools)
+    public function update(Request $request, Keystage $keystages)
     {
         //
     }
@@ -75,10 +75,10 @@ class SchoolsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Schools  $schools
+     * @param  \App\Models\Keystages  $keystages
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Schools $schools)
+    public function destroy(Keystage $keystages)
     {
         //
     }
