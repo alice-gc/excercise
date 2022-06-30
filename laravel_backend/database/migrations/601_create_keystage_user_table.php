@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Keystage;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,15 +15,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('keystages_teacher_data', function (Blueprint $table) {
+        Schema::create('keystage_user', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('keystage_id')->unsigned();
-            $table->foreign('keystage_id')->references('id')->on('keystages')->onDelete('cascade');
-            $table->unsignedInteger('teacher_profile_id');
-            $table->foreign('teacher_profile_id')
-                ->references('id')
-                ->on('teacher_data')
-                ->onDelete('cascade');
+            $table->foreignIdFor(Keystage::class);
+            $table->foreignIdFor(User::class);
             $table->timestamps();
         });
     }

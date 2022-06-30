@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Distance_teacher_data;
+use App\Models\Address;
 use Illuminate\Http\Request;
 
-class DistanceTeacherDataController extends Controller
+class AddressController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class DistanceTeacherDataController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Distance_teacher_data  $distance_teacher_data
+     * @param  \App\Models\Users  $users
      * @return \Illuminate\Http\Response
      */
-    public function show(Distance_teacher_data $distance_teacher_data)
+    public function show(Address $users)
     {
         //
     }
@@ -52,10 +52,10 @@ class DistanceTeacherDataController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Distance_teacher_data  $distance_teacher_data
+     * @param  \App\Models\Users  $users
      * @return \Illuminate\Http\Response
      */
-    public function edit(Distance_teacher_data $distance_teacher_data)
+    public function edit(Address $users)
     {
         //
     }
@@ -64,10 +64,10 @@ class DistanceTeacherDataController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Distance_teacher_data  $distance_teacher_data
+     * @param  \App\Models\Users  $users
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Distance_teacher_data $distance_teacher_data)
+    public function update(Request $request, Address $users)
     {
         //
     }
@@ -75,10 +75,10 @@ class DistanceTeacherDataController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Distance_teacher_data  $distance_teacher_data
+     * @param  \App\Models\Users  $users
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Distance_teacher_data $distance_teacher_data)
+    public function destroy(Address $users)
     {
         //
     }

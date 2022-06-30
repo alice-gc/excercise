@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Subjects;
+use App\Models\Subject;
 use Illuminate\Http\Request;
 
-class SubjectsController extends Controller
+class SubjectController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -44,7 +44,7 @@ class SubjectsController extends Controller
      * @param  \App\Models\Subjects  $subjects
      * @return \Illuminate\Http\Response
      */
-    public function show(Subjects $subjects)
+    public function show(Subject $subjects)
     {
         //
     }
@@ -55,7 +55,7 @@ class SubjectsController extends Controller
      * @param  \App\Models\Subjects  $subjects
      * @return \Illuminate\Http\Response
      */
-    public function edit(Subjects $subjects)
+    public function edit(Subject $subjects)
     {
         //
     }
@@ -67,7 +67,7 @@ class SubjectsController extends Controller
      * @param  \App\Models\Subjects  $subjects
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Subjects $subjects)
+    public function update(Request $request, Subject $subjects)
     {
         //
     }
@@ -78,7 +78,7 @@ class SubjectsController extends Controller
      * @param  \App\Models\Subjects  $subjects
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Subjects $subjects)
+    public function destroy(Subject $subjects)
     {
         //
     }

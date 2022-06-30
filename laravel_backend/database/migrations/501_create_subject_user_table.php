@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Subject;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,21 +17,8 @@ return new class extends Migration
     {
         Schema::create('subject_user', function (Blueprint $table) {
             $table->increments('id');
-
-
-
-            $table->unsignedInteger('subject_id');
-            $table->foreign('subject_id')
-                ->references('id')
-                ->on('subjects')
-                ->onDelete('cascade');
-
-            $table->unsignedInteger('user_id');
-            $table->foreign('user_id')
-                ->references('id')
-                ->on('users')
-                ->onDelete('cascade');
-
+            $table->foreignIdFor(Subject::class);
+            $table->foreignIdFor(User::class);
             $table->timestamps();
         });
     }
@@ -41,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('teachers_subject_data');
+        Schema::dropIfExists('subject_user');
     }
 };

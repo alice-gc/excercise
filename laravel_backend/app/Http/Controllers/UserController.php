@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\School_admin;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class SchoolAdminController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class SchoolAdminController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\School_admin  $school_admin
+     * @param  \App\Models\Users  $users
      * @return \Illuminate\Http\Response
      */
-    public function show(School_admin $school_admin)
+    public function show(User $users)
     {
         //
     }
@@ -52,10 +52,10 @@ class SchoolAdminController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\School_admin  $school_admin
+     * @param  \App\Models\Users  $users
      * @return \Illuminate\Http\Response
      */
-    public function edit(School_admin $school_admin)
+    public function edit(User $users)
     {
         //
     }
@@ -64,10 +64,10 @@ class SchoolAdminController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\School_admin  $school_admin
+     * @param  \App\Models\Users  $users
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, School_admin $school_admin)
+    public function update(Request $request, User $users)
     {
         //
     }
@@ -75,10 +75,10 @@ class SchoolAdminController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\School_admin  $school_admin
+     * @param  \App\Models\Users  $users
      * @return \Illuminate\Http\Response
      */
-    public function destroy(School_admin $school_admin)
+    public function destroy(User $users)
     {
         //
     }
