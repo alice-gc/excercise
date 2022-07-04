@@ -19,3 +19,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
 Route::get('/school', [SchoolController::class , 'index']);
+
+Route::middleware('auth:sanctum')->get('/request_form', function (Request $request) {
+    return $request->request_form();
+});
