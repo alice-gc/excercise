@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\JobController;
+use App\Http\Controllers\RequestFormController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SchoolController;
@@ -20,6 +21,10 @@ Route::middleware('auth:sanctum')->group(function () {
 
 Route::get('/school', [SchoolController::class , 'index']);
 
-Route::middleware('auth:sanctum')->get('/request_form', function (Request $request) {
-    return $request->request_form();
+Route::middleware('auth:sanctum')->get('/request-form', function () {
+    Route::resource('request_form', RequestFormController::class); //need to get the show route
+});
+
+Route::middleware('auth:sanctum')->post('/send-request', function () {
+    Route::resource('send_request', RequestFormController::class); //need to use the store/create route
 });

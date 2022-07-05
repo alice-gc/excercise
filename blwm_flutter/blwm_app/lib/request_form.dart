@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 
 // Define a custom Form widget.
@@ -12,8 +10,12 @@ class RequestForm extends StatefulWidget {
   }
 }
 
+enum KeyStage { keystage1, keystage2, keystage3, keystage4 }
+
 class RequestFormState extends State<RequestForm> {
   final _requestFormKey = GlobalKey<FormState>();
+
+  KeyStage? _keystage = KeyStage.keystage1;
 
   @override
   Widget build(BuildContext context) {
@@ -26,30 +28,65 @@ class RequestFormState extends State<RequestForm> {
             child: Form(
                 key: _requestFormKey,
                 child: ListView(children: <Widget>[
+                  ListTile(
+                    // TODO: make into dropdowns
+                    title: const Text('Key Stage 1'),
+                    leading: Radio<KeyStage>(
+                        value: KeyStage.keystage1,
+                        groupValue: _keystage,
+                        onChanged: (KeyStage? value) {
+                          setState(() {
+                            _keystage = value;
+                          });
+                        }),
+                  ),
+                  ListTile(
+                    title: const Text('Key Stage 2'),
+                    leading: Radio<KeyStage>(
+                        value: KeyStage.keystage2,
+                        groupValue: _keystage,
+                        onChanged: (KeyStage? value) {
+                          setState(() {
+                            _keystage = value;
+                          });
+                        }),
+                  ),
+                  ListTile(
+                    title: const Text('Key Stage 3'),
+                    leading: Radio<KeyStage>(
+                        value: KeyStage.keystage3,
+                        groupValue: _keystage,
+                        onChanged: (KeyStage? value) {
+                          setState(() {
+                            _keystage = value;
+                          });
+                        }),
+                  ),
+                  ListTile(
+                    title: const Text('Key Stage 4'),
+                    leading: Radio<KeyStage>(
+                        value: KeyStage.keystage4,
+                        groupValue: _keystage,
+                        onChanged: (KeyStage? value) {
+                          setState(() {
+                            _keystage = value;
+                          });
+                        }),
+                  ),
                   TextFormField(
-                      key: _requestFormKey,
-                      decoration: const InputDecoration(
-                          hintText: 'e.g. Key Stage 1',
-                          labelText: 'Key Stage:')),
-                  TextFormField(
-                      key: _requestFormKey,
                       decoration: const InputDecoration(
                           hintText: 'e.g. Maths', labelText: 'Subject:')),
                   TextFormField(
-                      key: _requestFormKey,
                       decoration: const InputDecoration(
                           hintText: 'School Name & Address',
                           labelText: 'Location:')),
                   TextFormField(
-                      key: _requestFormKey,
                       decoration: const InputDecoration(
                           hintText: 'e.g. 12/09/2022', labelText: 'Dates:')),
                   TextFormField(
-                      key: _requestFormKey,
                       decoration: const InputDecoration(
                           hintText: 'e.g. 8:40am', labelText: 'Arrival Time:')),
                   TextFormField(
-                      key: _requestFormKey,
                       decoration: const InputDecoration(
                           hintText: 'e.g. 3:30pm',
                           labelText: 'Departure Time:')),
@@ -58,10 +95,8 @@ class RequestFormState extends State<RequestForm> {
                     child: ElevatedButton(
                       onPressed:
                           () {}, //post req that sends the job req to the backend
-                      child: Text(
-                          key: _requestFormKey,
-                          'Create Placement',
-                          style: const TextStyle(color: Colors.blue)),
+                      child: const Text('Create Placement',
+                          style: TextStyle(color: Colors.white)),
                     ),
                   )
                 ]))));
