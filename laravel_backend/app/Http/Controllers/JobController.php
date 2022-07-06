@@ -36,6 +36,7 @@ class JobController extends Controller
      */
     public function store(StoreJobRequest $request)
     {
+        //links the job to the user and the school that created it
         $validated = $request->validated();
         $request->user()->school->jobs()->create($validated);
     }

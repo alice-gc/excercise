@@ -22,9 +22,9 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::get('/school', [SchoolController::class , 'index']);
 
 Route::middleware('auth:sanctum')->get('/request-form', function () {
-    Route::resource('request_form', RequestFormController::class); //need to get the show route
+    Route::resource('request_form', RequestFormController::class, 'show');
 });
 
 Route::middleware('auth:sanctum')->post('/send-request', function () {
-    Route::resource('send_request', RequestFormController::class); //need to use the store/create route
+    Route::resource('send_request', RequestFormController::class, 'store');
 });

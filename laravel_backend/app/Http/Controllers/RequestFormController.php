@@ -36,7 +36,18 @@ class RequestFormController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $params = $request->only([
+            'school_id',
+            'subject_id',
+            'keystage_id',
+            'date',
+            'user_id',
+            'user_id'
+        ]);
+
+        RequestForm::create($params);
+
+        return 'Done';
     }
 
     /**

@@ -18,11 +18,8 @@ class DatabaseSeeder extends Seeder
             DistanceSeeder::class,
             JobSeeder::class,
             KeystageSeeder::class,
-            RoleSeeder::class,
-            SchoolAdminSeeder::class,
             SchoolSeeder::class,
             SubjectSeeder::class,
-            TeacherDataSeeder::class,
             UserSeeder::class
         ]);
     }
