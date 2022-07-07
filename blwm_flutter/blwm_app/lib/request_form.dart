@@ -1,21 +1,17 @@
+import 'package:blwm_app/school.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:intl/intl.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 @override
 Widget build(BuildContext context) {
-  return MaterialApp(
+  return const MaterialApp(
     title: 'Flutter FormBuilder Demo',
     debugShowCheckedModeBanner: false,
-    localizationsDelegates: const [
-      FormBuilderLocalizations.delegate,
-      GlobalMaterialLocalizations.delegate,
-      GlobalWidgetsLocalizations.delegate,
-    ],
-    supportedLocales: FormBuilderLocalizations.delegate.supportedLocales,
-    home: const RequestForm(),
+    home: RequestForm(),
   );
 }
 
@@ -45,7 +41,7 @@ class _RequestFormState extends State<RequestForm> {
 
   var subjectOptions = [
     'English',
-    'Mathmeatics',
+    'Mathematics',
     'Biology',
     'Chemistry',
     'Physics',
@@ -89,13 +85,12 @@ class _RequestFormState extends State<RequestForm> {
                   children: <Widget>[
                     const SizedBox(height: 15),
                     FormBuilderDropdown<String>(
-                      // autovalidate: true,
                       name: 'keystage',
                       decoration: InputDecoration(
                         labelText: 'Keystage',
                         suffix: _keystageHasError
                             ? const Icon(Icons.error)
-                            : const Icon(Icons.check),
+                            : const Icon(Icons.check_circle),
                       ),
                       allowClear: true,
                       hint: const Text('Select Keystage'),
@@ -127,7 +122,6 @@ class _RequestFormState extends State<RequestForm> {
                             ? const Icon(Icons.error)
                             : const Icon(Icons.check),
                       ),
-                      // initialValue: 'subject 1',
                       allowClear: true,
                       hint: const Text('Select Subject'),
                       validator: FormBuilderValidators.compose(
