@@ -41,6 +41,7 @@ dependencies:
   jiffy: ^5.0.0
   http: 0.13.4
   syncfusion_flutter_datagrid: ^20.2.36
+  dio: ^4.0.0
 
 dev_dependencies:
   flutter_test:

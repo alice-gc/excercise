@@ -1,4 +1,5 @@
 import 'package:blwm_app/school.dart';
+import 'package:blwm_app/send_request_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -9,7 +10,7 @@ import 'package:http/http.dart' as http;
 @override
 Widget build(BuildContext context) {
   return const MaterialApp(
-    title: 'Flutter FormBuilder Demo',
+    title: 'Request a Supply Teacher',
     debugShowCheckedModeBanner: false,
     home: RequestForm(),
   );
@@ -83,6 +84,19 @@ class _RequestFormState extends State<RequestForm> {
                 skipDisabled: true,
                 child: Column(
                   children: <Widget>[
+                    const SizedBox(width: 20),
+                    Expanded(
+                      child: OutlinedButton(
+                        onPressed: () {
+                          _formKey.currentState?.reset();
+                        },
+                        child: Text(
+                          'Reset',
+                          style: TextStyle(
+                              color: Theme.of(context).colorScheme.secondary),
+                        ),
+                      ),
+                    ),
                     const SizedBox(height: 15),
                     FormBuilderDropdown<String>(
                       name: 'keystage',
@@ -224,6 +238,11 @@ class _RequestFormState extends State<RequestForm> {
                       onPressed: () {
                         if (_formKey.currentState?.saveAndValidate() ?? false) {
                           debugPrint(_formKey.currentState?.value.toString());
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const SendRequestForm()),
+                          );
                         } else {
                           debugPrint(_formKey.currentState?.value.toString());
                           debugPrint('validation failed');
@@ -232,19 +251,6 @@ class _RequestFormState extends State<RequestForm> {
                       child: const Text(
                         'Request',
                         style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 20),
-                  Expanded(
-                    child: OutlinedButton(
-                      onPressed: () {
-                        _formKey.currentState?.reset();
-                      },
-                      child: Text(
-                        'Reset',
-                        style: TextStyle(
-                            color: Theme.of(context).colorScheme.secondary),
                       ),
                     ),
                   ),
