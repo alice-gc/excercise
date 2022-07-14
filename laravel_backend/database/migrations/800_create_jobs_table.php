@@ -1,5 +1,9 @@
 <?php
 
+use App\Models\Keystage;
+use App\Models\School;
+use App\Models\Subject;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -18,18 +22,11 @@ return new class extends Migration
             $table->string('date');
             $table->string('time_boundries');
             $table->timestamps();
-
-            $table->integer('teacher_id')->unsigned();
-            $table->foreign('teacher_id')->references('id')->on('teacher_data')->onDelete('cascade');
-
-            $table->integer('subject_id')->unsigned();
-            $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
-
-            $table->integer('keystage_id')->unsigned();
-            $table->foreign('keystage_id')->references('id')->on('keystages')->onDelete('cascade');
-
-            $table->integer('school_id')->unsigned();
-            $table->foreign('school_id')->references('id')->on('schools')->onDelete('cascade');
+            $table->foreignIdFor(User::class, column:'admin_id'); //unsure if this will work
+            $table->foreignIdFor(User::class, column:'supply_id'); //ditto
+            $table->foreignIdFor(Subject::class);
+            $table->foreignIdFor(Keystage::class);
+            $table->foreignIdFor(School::class);
         });
     }
 

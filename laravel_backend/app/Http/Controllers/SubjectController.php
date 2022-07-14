@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Subject_teacher_data;
+use App\Models\Subject;
 use Illuminate\Http\Request;
 
-class SubjectTeacherDataController extends Controller
+class SubjectController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class SubjectTeacherDataController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Subject_teacher_data  $subject_teacher_data
+     * @param  \App\Models\Subjects  $subjects
      * @return \Illuminate\Http\Response
      */
-    public function show(Subject_teacher_data $subject_teacher_data)
+    public function show(Subject $subjects)
     {
         //
     }
@@ -52,10 +52,10 @@ class SubjectTeacherDataController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Subject_teacher_data  $subject_teacher_data
+     * @param  \App\Models\Subjects  $subjects
      * @return \Illuminate\Http\Response
      */
-    public function edit(Subject_teacher_data $subject_teacher_data)
+    public function edit(Subject $subjects)
     {
         //
     }
@@ -64,10 +64,10 @@ class SubjectTeacherDataController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Subject_teacher_data  $subject_teacher_data
+     * @param  \App\Models\Subjects  $subjects
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Subject_teacher_data $subject_teacher_data)
+    public function update(Request $request, Subject $subjects)
     {
         //
     }
@@ -75,10 +75,10 @@ class SubjectTeacherDataController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Subject_teacher_data  $subject_teacher_data
+     * @param  \App\Models\Subjects  $subjects
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Subject_teacher_data $subject_teacher_data)
+    public function destroy(Subject $subjects)
     {
         //
     }

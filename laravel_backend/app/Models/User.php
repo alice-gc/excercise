@@ -21,9 +21,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'preferrend_name',
+        'preferred_name',
         'phone',
-        'user_role',
+        'custom_role_id',
+        'address',
     ];
 
     /**
@@ -46,8 +47,18 @@ class User extends Authenticatable
     ];
 
 
-    public function roles()
+    public function customRoles()
     {
         return $this->hasMany(User::class);
+    }
+
+    public function subjects()
+    {
+        return $this->belongsToMany(Subject::class);
+    }
+
+    public function keystages()
+    {
+        return $this->belongsToMany(Keystage::class);
     }
 }

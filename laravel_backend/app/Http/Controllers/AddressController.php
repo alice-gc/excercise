@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Jobs;
+use App\Models\Address;
 use Illuminate\Http\Request;
 
-class JobsController extends Controller
+class AddressController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,21 +41,25 @@ class JobsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Jobs  $jobs
+     * @param  \App\Models\Users  $users
      * @return \Illuminate\Http\Response
      */
-    public function show(Jobs $jobs)
+    public function show(Address $users)
     {
-        //
+        // $school = Auth::user()->school_id;
+
+
+
+        return Address::all();
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Jobs  $jobs
+     * @param  \App\Models\Users  $users
      * @return \Illuminate\Http\Response
      */
-    public function edit(Jobs $jobs)
+    public function edit(Address $users)
     {
         //
     }
@@ -64,10 +68,10 @@ class JobsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Jobs  $jobs
+     * @param  \App\Models\Users  $users
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Jobs $jobs)
+    public function update(Request $request, Address $users)
     {
         //
     }
@@ -75,10 +79,10 @@ class JobsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Jobs  $jobs
+     * @param  \App\Models\Users  $users
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Jobs $jobs)
+    public function destroy(Address $users)
     {
         //
     }

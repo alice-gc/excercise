@@ -5,15 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Jobs extends Model
+class CustomRole extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'school_id',
-        'subject_id',
-        'keystage_id',
-        'date',
-        'user_id'
+        'type',
     ];
+
+
+    public function users()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Subjects;
+use App\Models\Keystage;
 use Illuminate\Http\Request;
 
-class SubjectsController extends Controller
+class KeystageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class SubjectsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Subjects  $subjects
+     * @param  \App\Models\Keystages  $keystages
      * @return \Illuminate\Http\Response
      */
-    public function show(Subjects $subjects)
+    public function show(Keystage $keystages)
     {
         //
     }
@@ -52,10 +52,10 @@ class SubjectsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Subjects  $subjects
+     * @param  \App\Models\Keystages  $keystages
      * @return \Illuminate\Http\Response
      */
-    public function edit(Subjects $subjects)
+    public function edit(Keystage $keystages)
     {
         //
     }
@@ -64,10 +64,10 @@ class SubjectsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Subjects  $subjects
+     * @param  \App\Models\Keystages  $keystages
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Subjects $subjects)
+    public function update(Request $request, Keystage $keystages)
     {
         //
     }
@@ -75,10 +75,10 @@ class SubjectsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Subjects  $subjects
+     * @param  \App\Models\Keystages  $keystages
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Subjects $subjects)
+    public function destroy(Keystage $keystages)
     {
         //
     }

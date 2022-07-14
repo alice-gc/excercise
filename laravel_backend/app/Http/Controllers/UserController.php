@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Teacher_data;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class TeacherDataController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class TeacherDataController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Teacher_data  $teacher_data
+     * @param  \App\Models\Users  $users
      * @return \Illuminate\Http\Response
      */
-    public function show(Teacher_data $teacher_data)
+    public function show(User $users)
     {
         //
     }
@@ -52,10 +52,10 @@ class TeacherDataController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Teacher_data  $teacher_data
+     * @param  \App\Models\Users  $users
      * @return \Illuminate\Http\Response
      */
-    public function edit(Teacher_data $teacher_data)
+    public function edit(User $users)
     {
         //
     }
@@ -64,10 +64,10 @@ class TeacherDataController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Teacher_data  $teacher_data
+     * @param  \App\Models\Users  $users
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Teacher_data $teacher_data)
+    public function update(Request $request, User $users)
     {
         //
     }
@@ -75,10 +75,10 @@ class TeacherDataController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Teacher_data  $teacher_data
+     * @param  \App\Models\Users  $users
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Teacher_data $teacher_data)
+    public function destroy(User $users)
     {
         //
     }
