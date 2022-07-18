@@ -38,6 +38,18 @@ class _LoginState extends State<LoginScreen> {
   late String _password;
 
   void submit() {
+    try {
+      Provider.of<Auth>(context, listen: false).login(credentials: {
+        'email': _email,
+        'password': _password,
+      });
+    } catch (e) {
+      const snackBar = SnackBar(
+        content: Text("Please Register"),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+
     log(_email);
     log(_password);
   }
@@ -68,6 +80,7 @@ class _LoginState extends State<LoginScreen> {
                         }),
                     TextFormField(
                         controller: _passwordController,
+                        obscureText: true,
                         validator: (value) => value!.isEmpty
                             ? 'please enter valid password'
                             : null,

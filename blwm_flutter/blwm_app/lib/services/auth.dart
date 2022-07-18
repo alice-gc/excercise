@@ -20,32 +20,28 @@ class Auth extends ChangeNotifier {
   bool get authenticated => _isLoggedIn;
   User get user => _user;
 
-  void login({Map? credentials}) {
-    print(credentials);
-
-    _isLoggedIn = true;
-
-    notifyListeners();
-
+  Future login({required Map credentials}) async {
     String? deviceId;
 
     try {
-      deviceId = PlatformDeviceId.getDeviceId as String?;
+      deviceId = await PlatformDeviceId.getDeviceId;
     } catch (e) {
       log(e.toString());
     }
 
-    Dio.Response response = dio().post('auth/login',
-            data: json.encode(credentials!..addAll({'deviceID': deviceId})))
-        as Dio.Response;
+    Dio.Response response = await dio().post('auth/token',
+        data: json.encode(credentials..addAll({'deviceId': deviceId})));
 
     String token = json.decode(response.toString())['token'];
-    log(token);
+
     attempt(token);
+
     storeToken(token);
   }
 
   Future register({required Map credentials}) async {
+    User? retrivedUser;
+
     String? deviceId;
 
     try {
@@ -55,12 +51,11 @@ class Auth extends ChangeNotifier {
     }
 
     Dio.Response response = await dio().post('auth/register',
-        data: json.encode(credentials..addAll({'deviceID': deviceId})));
+        data: json.encode(credentials..addAll({'deviceId': deviceId})));
 
-    String token = json.decode(response.toString())['token'];
-    log(token);
-    await attempt(token);
-    storeToken(token);
+    retrivedUser = json.decode(response.data);
+
+    return retrivedUser;
   }
 
   Future attempt(String token) async {
@@ -84,7 +79,7 @@ class Auth extends ChangeNotifier {
     return await storage.read(key: 'auth');
   }
 
-  DeleteToken() async {
+  deleteToken() async {
     await storage.delete(key: 'auth');
   }
 
@@ -102,11 +97,11 @@ class Auth extends ChangeNotifier {
   void logout() {
     _isLoggedIn = false;
 
-     dio().delete('auth/token',
+    dio().delete('auth/token',
         data: {'deviceId': getDeviceId()},
         options: Dio.Options(headers: {'auth': true}));
 
-     DeleteToken();
+    deleteToken();
 
     notifyListeners();
   }

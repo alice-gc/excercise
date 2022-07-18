@@ -24,17 +24,14 @@ class NavDrawer extends StatelessWidget {
               color: Colors.blue,
             ),
               child: Column(
-                children: const [
+                children:  [
                     CircleAvatar(
                       backgroundColor: Colors.white,
                     radius: 30,
                      ),
                     SizedBox(height: 10,),
-                    Text('title title', style: 
-                    TextStyle(color: Colors.white),),
+                    Text('Hello ' + auth.user.email, style: const TextStyle(color: Colors.white),),
                     SizedBox(height: 10,),
-                    Text('subtitle subtitle', style: 
-                    TextStyle(color: Colors.white),),
                 ],
               ),
             ),
@@ -42,7 +39,7 @@ class NavDrawer extends StatelessWidget {
               title: Text('User name'),
             ),
             ListTile(
-              title: const Text('Posts'),
+              title: const Text('Jobs'),
               onTap: () {
                 Navigator.push(
                     context,

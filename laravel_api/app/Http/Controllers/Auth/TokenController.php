@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Auth\AuthenticationException;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class TokenController extends Controller
 {
@@ -19,6 +21,30 @@ class TokenController extends Controller
       'email' => 'required|email',
       'password' => 'required',
     ]);
+
+    if (!auth()->attempt($request->only('email', 'password'))) {
+      throw new AuthenticationException();
+    }
+
+    return [
+      'token' => auth()->user()->createToken($request->deviceId)->plainTextToken
+    ];
+  }
+
+  public function register(Request $request)
+  {
+
+    $validatedData = $request->validate([
+      'email' => 'required|email',
+      'password' => 'required',
+      'custom_role_id' => 'required'
+
+    ]);
+
+    $validatedData['password'] = Hash::make($validatedData['password']);
+
+    User::updateOrCreate($validatedData);
+
 
     if (!auth()->attempt($request->only('email', 'password'))) {
       throw new AuthenticationException();
