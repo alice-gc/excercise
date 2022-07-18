@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreJobRequest;
+use App\Models\RequestForm;
 use Illuminate\Http\Request;
-use app\Models\RequestForm;
 
 class RequestFormController extends Controller
-
 {
     /**
      * Display a listing of the resource.
@@ -34,8 +34,12 @@ class RequestFormController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreJobRequest $request)
     {
+        //links the job to the user and the school that created it
+        $validated = $request->validated();
+        $request->user()->school->jobs()->create($validated);
+
         $params = $request->only([
             'school_id',
             'subject_id',
@@ -53,10 +57,10 @@ class RequestFormController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Users  $users
+     * @param  \App\Models\RequestForm   $requests
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request)
+    public function show(RequestForm $requests)
     {
         //
     }
@@ -64,10 +68,10 @@ class RequestFormController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Users  $users
+     * @param  \App\Models\RequestForm   $requests
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request)
+    public function edit(RequestForm $requests)
     {
         //
     }
@@ -76,10 +80,10 @@ class RequestFormController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Users  $users
+     * @param  \App\Models\RequestForm   $requests
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, RequestForm $requests)
     {
         //
     }
@@ -87,10 +91,10 @@ class RequestFormController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Users  $users
+     * @param  \App\Models\RequestForm   $requests
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy(RequestForm $request)
     {
         //
     }
