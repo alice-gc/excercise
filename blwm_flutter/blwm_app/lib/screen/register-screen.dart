@@ -1,37 +1,19 @@
 // ignore_for_file: avoid_print
 
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatefulWidget {
-  // const LoginScreen({Key? key}) : super(key: key);
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({Key? key}) : super(key: key);
 
   @override
-  // State<StatefulWidget> createState() {
-  //   return LoginState();
-  _LoginState createState() => _LoginState();
+  State<StatefulWidget> createState() {
+    return RegisterState();
+  }
 }
 
-class _LoginState extends State<LoginScreen> {
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-
+class RegisterState extends State<RegisterScreen> {
   final _formKey = GlobalKey<FormState>();
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
-    super.dispose();
-  }
-
   late String _email;
   late String _password;
 
@@ -44,7 +26,7 @@ class _LoginState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Login'),
+        title: const Text('Register'),
       ),
       body: Form(
         key: _formKey,
@@ -54,9 +36,6 @@ class _LoginState extends State<LoginScreen> {
                 child: Column(
                   children: [
                     TextFormField(
-                        controller: _emailController,
-                        validator: (value) =>
-                            value!.isEmpty ? 'please enter valid email' : null,
                         decoration: const InputDecoration(
                           labelText: 'Email',
                           hintText: 'you@somewhere.com',
@@ -65,10 +44,6 @@ class _LoginState extends State<LoginScreen> {
                           _email = value!;
                         }),
                     TextFormField(
-                        controller: _passwordController,
-                        validator: (value) => value!.isEmpty
-                            ? 'please enter valid password'
-                            : null,
                         decoration:
                             const InputDecoration(labelText: 'Password'),
                         onSaved: (value) {
@@ -77,15 +52,11 @@ class _LoginState extends State<LoginScreen> {
                     SizedBox(
                         width: double.infinity,
                         child: TextButton(
-                          child: Text('Login'),
+                          child: Text('Register'),
                           onPressed: () {
-                            // _formKey.currentState!.save();
+                            _formKey.currentState!.save();
 
-                            // submit();
-
-                            if (_formKey.currentState!.validate()) {
-                              print(_emailController.text);
-                            }
+                            submit();
                           },
                         ))
                   ],

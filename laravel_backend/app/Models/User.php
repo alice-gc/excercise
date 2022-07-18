@@ -61,4 +61,12 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Keystage::class);
     }
+
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
+
 }
