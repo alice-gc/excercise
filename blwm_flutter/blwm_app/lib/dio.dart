@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:blwm_app/providers/auth.dart';
+import 'package:blwm_app/services/auth.dart';
 import 'package:dio/dio.dart';
 
 Dio dio() {

@@ -2,7 +2,9 @@
 
 import 'dart:developer';
 
+import 'package:blwm_app/services/auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   // const LoginScreen({Key? key}) : super(key: key);
@@ -83,8 +85,17 @@ class _LoginState extends State<LoginScreen> {
 
                             // submit();
 
+                            Map credentials = {
+                              'email': _emailController.text,
+                              'password': _passwordController.text,
+                              'device': "token?",
+                            };
+
                             if (_formKey.currentState!.validate()) {
-                              print(_emailController.text);
+                              Provider.of<Auth>(context, listen: false)
+                                  .login(credentials: credentials);
+
+                              Navigator.pop(context);
                             }
                           },
                         ))

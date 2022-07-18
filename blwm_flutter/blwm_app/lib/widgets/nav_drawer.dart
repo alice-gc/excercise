@@ -1,11 +1,11 @@
-import 'package:blwm_app/screen/posts-screen.dart';
+import 'package:blwm_app/screens/posts_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
-import '../providers/auth.dart';
-import '../screen/login-screen.dart';
-import '../screen/register-screen.dart';
+import '../services/auth.dart';
+import '../screens/login_screen.dart';
+import '../screens/register_screen.dart';
 
 
 class NavDrawer extends StatelessWidget {
@@ -13,7 +13,8 @@ class NavDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Drawer(child: Consumer<Auth>(
+    return Drawer(
+      child: Consumer<Auth>(
       builder: (context, auth, child) {
         if (auth.authenticated) {
           return ListView(
@@ -51,38 +52,21 @@ class NavDrawer extends StatelessWidget {
             ),
             ListTile(
               title: const Text('Logout'),
-              leading: Icon(Icons.logout),
+              leading: const Icon(Icons.logout),
               onTap: () {
-                Provider.of<Auth>(context, listen: false).logout();
+                    Provider.of<Auth>(context, listen: false)
+                                  .logout();
+
+
+                // Provider.of<Auth>(context, listen: false).logout();
               },
             ),
           ]);
         } else {
           return ListView(
             children: [
-
-             DrawerHeader(
-              decoration: const BoxDecoration(
-              color: Colors.blue,
-            ),
-              child: Column(
-                children: const [
-                    CircleAvatar(
-                      backgroundColor: Colors.white,
-                    radius: 30,
-                     ),
-                    SizedBox(height: 10,),
-                    Text('title title', style: 
-                    TextStyle(color: Colors.white),),
-                    SizedBox(height: 10,),
-                    Text('subtitle subtitle', style: 
-                    TextStyle(color: Colors.white),),
-                ],
-              ),
-            ),
-
               ListTile(
-                  title: Text('Login'),
+                  title: const Text('Login'),
                   leading: Icon(Icons.login),
                   onTap: () {
                     Navigator.push(
@@ -91,12 +75,13 @@ class NavDrawer extends StatelessWidget {
                             builder: (context) =>  LoginScreen()));
                   }),
               ListTile(
-                  title: Text('Register'),
+                  title: const Text('Register'),
+                  leading: const Icon(Icons.assignment),
                   onTap: () {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>  RegisterScreen()));
+                            builder: (context) =>  const RegisterScreen()));
                   })
             ],
           );

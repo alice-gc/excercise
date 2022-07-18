@@ -1,9 +1,9 @@
 // import 'dart:html';
 // import 'dart:js';
 
-import 'package:blwm_app/providers/auth.dart';
-import 'package:blwm_app/screen/home_screen.dart';
-import 'package:blwm_app/widgets/nav-drawer.dart';
+import 'package:blwm_app/services/auth.dart';
+import 'package:blwm_app/screens/home_screen.dart';
+import 'package:blwm_app/widgets/nav_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
@@ -15,7 +15,18 @@ import 'package:provider/provider.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 void main() {
-  runApp(ChangeNotifierProvider(create: (_) => Auth(), child: MyApp()));
+  runApp(
+    MultiProvider(providers: [
+
+    // ChangeNotifierProvider(create: (_) => Auth(), child: MyApp()));
+
+
+        ChangeNotifierProvider(create: (context) => Auth()),        
+        
+    ],
+    child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

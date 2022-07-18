@@ -14,72 +14,64 @@ import '../dio.dart';
 class Auth extends ChangeNotifier {
   final storage = new FlutterSecureStorage();
 
-  bool _authenicated = false;
+  bool _isLoggedIn = false;
   late User _user;
 
-  bool get authenticated => _authenicated;
+  bool get authenticated => _isLoggedIn;
   User get user => _user;
 
-  Future login({required Map credentials}) async {
-    String? deviceId; 
+  void login({Map? credentials}) {
+    print(credentials);
+
+    _isLoggedIn = true;
+
+    notifyListeners();
+
+    String? deviceId;
 
     try {
-        deviceId = await PlatformDeviceId.getDeviceId;
-    }catch (e){
+      deviceId = PlatformDeviceId.getDeviceId as String?;
+    } catch (e) {
       log(e.toString());
     }
-    
-    
-    Dio.Response response = await dio().post(
-      'auth/login',
-        data: json.encode(credentials..addAll({'deviceID': deviceId}))
-        );
+
+    Dio.Response response = dio().post('auth/login',
+            data: json.encode(credentials!..addAll({'deviceID': deviceId})))
+        as Dio.Response;
 
     String token = json.decode(response.toString())['token'];
-log(token);
-    await attempt(token);
+    log(token);
+    attempt(token);
     storeToken(token);
   }
 
   Future register({required Map credentials}) async {
-    String? deviceId; 
+    String? deviceId;
 
     try {
-        deviceId = await PlatformDeviceId.getDeviceId;
-    }catch (e){
+      deviceId = await PlatformDeviceId.getDeviceId;
+    } catch (e) {
       log(e.toString());
     }
-    
-    
-    Dio.Response response = await dio().post('auth/register', data: json.encode(credentials..addAll({'deviceID': deviceId}))
-        );
+
+    Dio.Response response = await dio().post('auth/register',
+        data: json.encode(credentials..addAll({'deviceID': deviceId})));
 
     String token = json.decode(response.toString())['token'];
-log(token);
+    log(token);
     await attempt(token);
     storeToken(token);
   }
 
   Future attempt(String token) async {
     try {
-
       Dio.Response response = await dio().get('auth/user',
-          options: Dio.Options(headers: {'Authorization': 'Bearer $token'
-          }
-          )
-      );
-
-
-
-
-
-
-
+          options: Dio.Options(headers: {'Authorization': 'Bearer $token'}));
 
       _user = User.fromJson(json.decode(response.toString()));
-      _authenicated = true;
+      _isLoggedIn = true;
     } catch (e) {
-      _authenicated = false;
+      _isLoggedIn = false;
     }
     notifyListeners();
   }
@@ -107,14 +99,14 @@ log(token);
     }
   }
 
-  void logout() async {
-    _authenicated = false;
+  void logout() {
+    _isLoggedIn = false;
 
-    await dio().delete('auth/token',
+     dio().delete('auth/token',
         data: {'deviceId': getDeviceId()},
         options: Dio.Options(headers: {'auth': true}));
 
-    await DeleteToken();
+     DeleteToken();
 
     notifyListeners();
   }
