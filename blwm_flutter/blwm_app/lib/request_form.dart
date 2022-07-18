@@ -1,18 +1,21 @@
-import 'package:blwm_app/school.dart';
-// import 'package:blwm_app/send_request_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:intl/intl.dart';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
 
 @override
 Widget build(BuildContext context) {
-  return const MaterialApp(
-    title: 'Request a Supply Teacher',
+  return MaterialApp(
+    title: 'Flutter FormBuilder Demo',
     debugShowCheckedModeBanner: false,
-    home: RequestForm(),
+    localizationsDelegates: const [
+      FormBuilderLocalizations.delegate,
+      GlobalMaterialLocalizations.delegate,
+      GlobalWidgetsLocalizations.delegate,
+    ],
+    supportedLocales: FormBuilderLocalizations.delegate.supportedLocales,
+    home: const RequestForm(),
   );
 }
 
@@ -42,7 +45,7 @@ class _RequestFormState extends State<RequestForm> {
 
   var subjectOptions = [
     'English',
-    'Mathematics',
+    'Mathmeatics',
     'Biology',
     'Chemistry',
     'Physics',
@@ -84,27 +87,15 @@ class _RequestFormState extends State<RequestForm> {
                 skipDisabled: true,
                 child: Column(
                   children: <Widget>[
-                    const SizedBox(width: 20),
-                    Expanded(
-                      child: OutlinedButton(
-                        onPressed: () {
-                          _formKey.currentState?.reset();
-                        },
-                        child: Text(
-                          'Reset',
-                          style: TextStyle(
-                              color: Theme.of(context).colorScheme.secondary),
-                        ),
-                      ),
-                    ),
                     const SizedBox(height: 15),
                     FormBuilderDropdown<String>(
+                      // autovalidate: true,
                       name: 'keystage',
                       decoration: InputDecoration(
                         labelText: 'Keystage',
                         suffix: _keystageHasError
                             ? const Icon(Icons.error)
-                            : const Icon(Icons.check_circle),
+                            : const Icon(Icons.check),
                       ),
                       allowClear: true,
                       hint: const Text('Select Keystage'),
@@ -136,6 +127,7 @@ class _RequestFormState extends State<RequestForm> {
                             ? const Icon(Icons.error)
                             : const Icon(Icons.check),
                       ),
+                      // initialValue: 'subject 1',
                       allowClear: true,
                       hint: const Text('Select Subject'),
                       validator: FormBuilderValidators.compose(
@@ -238,11 +230,6 @@ class _RequestFormState extends State<RequestForm> {
                       onPressed: () {
                         if (_formKey.currentState?.saveAndValidate() ?? false) {
                           debugPrint(_formKey.currentState?.value.toString());
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                // builder: (context) => const SendRequestForm()),
-                          ),
                         } else {
                           debugPrint(_formKey.currentState?.value.toString());
                           debugPrint('validation failed');
@@ -251,6 +238,19 @@ class _RequestFormState extends State<RequestForm> {
                       child: const Text(
                         'Request',
                         style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 20),
+                  Expanded(
+                    child: OutlinedButton(
+                      onPressed: () {
+                        _formKey.currentState?.reset();
+                      },
+                      child: Text(
+                        'Reset',
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.secondary),
                       ),
                     ),
                   ),

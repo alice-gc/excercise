@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\School;
+use App\Http\Requests\StoreJobRequest;
+use App\Models\Job;
 use Illuminate\Http\Request;
 
-class SchoolController extends Controller
+class JobController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,7 @@ class SchoolController extends Controller
      */
     public function index()
     {
-        return School::all();
+        //
     }
 
     /**
@@ -24,7 +25,7 @@ class SchoolController extends Controller
      */
     public function create()
     {
-    //
+        //
     }
 
     /**
@@ -33,53 +34,55 @@ class SchoolController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreJobRequest $request)
     {
-    //
+        //links the job to the user and the school that created it
+        $validated = $request->validated();
+        $request->user()->school->jobs()->create($validated);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\school  $school
+     * @param  \App\Models\Jobs  $jobs
      * @return \Illuminate\Http\Response
      */
-    public function show(school $school)
+    public function show(Job $jobs)
     {
-    //
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\school  $school
+     * @param  \App\Models\Jobs  $jobs
      * @return \Illuminate\Http\Response
      */
-    public function edit(school $school)
+    public function edit(Job $jobs)
     {
-    //
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\school  $school
+     * @param  \App\Models\Jobs  $jobs
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, school $school)
+    public function update(Request $request, Job $jobs)
     {
-    //
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\school  $school
+     * @param  \App\Models\Jobs  $jobs
      * @return \Illuminate\Http\Response
      */
-    public function destroy(school $school)
+    public function destroy(Job $jobs)
     {
-    //
+        //
     }
 }

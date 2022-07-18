@@ -50,7 +50,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.5"
-
   device_info:
     dependency: transitive
     description:
@@ -212,7 +211,7 @@ packages:
     source: hosted
     version: "8.1.1"
   http:
-    dependency: "direct main"
+    dependency: "direct dev"
     description:
       name: http
       url: "https://pub.dartlang.org"
@@ -377,20 +376,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.0"
-  syncfusion_flutter_core:
-    dependency: transitive
-    description:
-      name: syncfusion_flutter_core
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "20.2.36"
-  syncfusion_flutter_datagrid:
-    dependency: "direct main"
-    description:
-      name: syncfusion_flutter_datagrid
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "20.2.36"
   term_glyph:
     dependency: transitive
     description:

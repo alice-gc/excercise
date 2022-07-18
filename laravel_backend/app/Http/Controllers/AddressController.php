@@ -46,11 +46,7 @@ class AddressController extends Controller
      */
     public function show(Address $users)
     {
-        // $school = Auth::user()->school_id;
-
-
-
-        return Address::all();
+        //
     }
 
     /**
