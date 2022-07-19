@@ -2,7 +2,9 @@
 
 import 'dart:developer';
 
+import 'package:blwm_app/services/auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   // const LoginScreen({Key? key}) : super(key: key);
@@ -36,6 +38,18 @@ class _LoginState extends State<LoginScreen> {
   late String _password;
 
   void submit() {
+    try {
+      Provider.of<Auth>(context, listen: false).login(credentials: {
+        'email': _email,
+        'password': _password,
+      });
+    } catch (e) {
+      const snackBar = SnackBar(
+        content: Text("Please Register"),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+
     log(_email);
     log(_password);
   }
@@ -66,6 +80,7 @@ class _LoginState extends State<LoginScreen> {
                         }),
                     TextFormField(
                         controller: _passwordController,
+                        obscureText: true,
                         validator: (value) => value!.isEmpty
                             ? 'please enter valid password'
                             : null,
@@ -83,8 +98,17 @@ class _LoginState extends State<LoginScreen> {
 
                             // submit();
 
+                            Map credentials = {
+                              'email': _emailController.text,
+                              'password': _passwordController.text,
+                              'device': "token?",
+                            };
+
                             if (_formKey.currentState!.validate()) {
-                              print(_emailController.text);
+                              Provider.of<Auth>(context, listen: false)
+                                  .login(credentials: credentials);
+
+                              Navigator.pop(context);
                             }
                           },
                         ))

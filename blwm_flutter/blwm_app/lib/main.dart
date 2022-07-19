@@ -1,21 +1,31 @@
 // import 'dart:html';
 // import 'dart:js';
 
-import 'package:blwm_app/providers/auth.dart';
-import 'package:blwm_app/screen/home_screen.dart';
-import 'package:blwm_app/widgets/nav-drawer.dart';
+import 'package:blwm_app/screens/school_home_screen.dart';
+import 'package:blwm_app/screens/teacher_home_screen.dart';
+import 'package:blwm_app/services/auth.dart';
+import 'package:blwm_app/screens/home_screen.dart';
+import 'package:blwm_app/widgets/nav_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import 'package:blwm_app/request_form.dart';
 import 'package:blwm_app/school.dart';
 
-
 import 'package:provider/provider.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 void main() {
-  runApp(ChangeNotifierProvider(create: (_) => Auth(), child: MyApp()));
+  runApp(
+    MultiProvider(
+      providers: [
+        // ChangeNotifierProvider(create: (_) => Auth(), child: MyApp()));
+
+        ChangeNotifierProvider(create: (context) => Auth()),
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -64,28 +74,18 @@ class _MyHomePageState extends State<MyHomePage> {
           title: Text(widget.title),
         ),
         drawer: NavDrawer(),
-        body: const Center(
-          child: Text('You are not loged in'),
-          // Positioned(
-          //   bottom: 0,
-          //   width: MediaQuery.of(context).size.width,
-          //   child: Center(
-          //     child: ElevatedButton.icon(
-          //       onPressed: () {
-          //         Navigator.push(
-          //           context,
-          //           MaterialPageRoute(
-          //               builder: (context) => const RequestForm()),
-          //         );
-          //       },
-          //       icon: const Icon(
-          //         Icons.add,
-          //         size: 24.0,
-          //       ),
-          //       label: const Text('Create Placement'),
-          //     ),
-          //   ),
-          // ),
-        ));
+        body: Center(child: Consumer<Auth>(builder: (context, auth, child) {
+          if (auth.authenticated) {
+            if (auth.user.customRoleId == 1) {
+              // Teacher page
+              return TeacherHomeScreen();
+            } else {
+              return SchoolHomeScreen();
+            }
+          }
+
+          return const Text('Please Login / Register to continue',
+              style: TextStyle(color: Colors.black, fontSize: 22));
+        })));
   }
 }

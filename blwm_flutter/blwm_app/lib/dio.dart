@@ -1,11 +1,17 @@
 import 'dart:developer';
 
-import 'package:blwm_app/providers/auth.dart';
+import 'package:blwm_app/services/auth.dart';
 import 'package:dio/dio.dart';
 
 Dio dio() {
+  
   var dio = Dio(BaseOptions(
-      baseUrl: 'http://127.0.0.1:8000/api/',
+
+    //alacrity
+    baseUrl: 'http://192.168.10.102:8000/api/',  
+
+    //android mi1
+      // baseUrl: 'http://192.168.7.160:8000/api/',
       responseType: ResponseType.plain,
       headers: {
         'accept': 'application/json',
