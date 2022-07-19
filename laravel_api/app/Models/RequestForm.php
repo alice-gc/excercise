@@ -10,12 +10,12 @@ class RequestForm extends Model
     use HasFactory;
 
     protected $fillable = [
-        'school_id', //school the admin belongs to that created the job
-        'subject_id', //subject to be taught
-        'keystage_id', //keystage to be taught
-        'date', //date the job is for
-        'user_id', //admin that created the job posting
-        'user_id' //teacher that accepts the job posting
+        'school_id',
+        'subject_id',
+        'keystage_id',
+        'date',
+        'user_id',
+        'user_id'
     ];
 
     public function keystages() {

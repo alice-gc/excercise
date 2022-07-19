@@ -18,13 +18,13 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        // 'name',
         'email',
         'password',
-        'preferred_name',
-        'phone',
+        // 'preferred_name',
+        // 'phone',
         'custom_role_id',
-        'address',
+        // 'address',
     ];
 
     /**
@@ -61,4 +61,12 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Keystage::class);
     }
+
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
+
 }

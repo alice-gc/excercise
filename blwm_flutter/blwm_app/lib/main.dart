@@ -1,26 +1,44 @@
+// import 'dart:html';
+// import 'dart:js';
+
+import 'package:blwm_app/screens/school_home_screen.dart';
+import 'package:blwm_app/screens/teacher_home_screen.dart';
+import 'package:blwm_app/services/auth.dart';
+import 'package:blwm_app/screens/home_screen.dart';
+import 'package:blwm_app/widgets/nav_drawer.dart';
 import 'package:flutter/material.dart';
-import 'dart:io';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
-import 'package:syncfusion_flutter_datagrid/datagrid.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
 import 'package:blwm_app/request_form.dart';
 import 'package:blwm_app/school.dart';
 
+import 'package:provider/provider.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        // ChangeNotifierProvider(create: (_) => Auth(), child: MyApp()));
+
+        ChangeNotifierProvider(create: (context) => Auth()),
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  // MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'School Name',
       theme: ThemeData(
-        primarySwatch: Colors.grey,
+        primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'School Name'),
+      home: const MyHomePage(title: 'Blwm'),
     );
   }
 }
@@ -35,7 +53,19 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  School schoolService = School();
+  final Storage = new FlutterSecureStorage();
+
+  void _attemptAuthenication() async {
+    final key = await Storage.read(key: 'auth');
+
+    Provider.of<Auth>(this.context, listen: false).attempt(key!);
+  }
+
+  @override
+  void initState() {
+    _attemptAuthenication();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,35 +73,19 @@ class _MyHomePageState extends State<MyHomePage> {
         appBar: AppBar(
           title: Text(widget.title),
         ),
-        body: Stack(
-          children: [
-            Positioned(
-              bottom: 0,
-              width: MediaQuery.of(context).size.width,
-              child: Center(
-                child: ElevatedButton.icon(
+        drawer: NavDrawer(),
+        body: Center(child: Consumer<Auth>(builder: (context, auth, child) {
+          if (auth.authenticated) {
+            if (auth.user.customRoleId == 1) {
+              // Teacher page
+              return TeacherHomeScreen();
+            } else {
+              return SchoolHomeScreen();
+            }
+          }
 
-
-
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const RequestForm()),
-                    );
-                  },
-
-
-                  
-                  icon: const Icon(
-                    Icons.add,
-                    size: 24.0,
-                  ),
-                  label: const Text('Create Placement'),
-                ),
-              ),
-            ),
-          ],
-        ));
+          return const Text('Please Login / Register to continue',
+              style: TextStyle(color: Colors.black, fontSize: 22));
+        })));
   }
 }

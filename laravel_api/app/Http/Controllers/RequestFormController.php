@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Address;
 use Illuminate\Http\Request;
+use app\Models\RequestForm;
 
-class AddressController extends Controller
+class RequestFormController extends Controller
+
 {
     /**
      * Display a listing of the resource.
@@ -35,7 +36,18 @@ class AddressController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $params = $request->only([
+            'school_id',
+            'subject_id',
+            'keystage_id',
+            'date',
+            'user_id',
+            'user_id'
+        ]);
+
+        RequestForm::create($params);
+
+        return 'Done';
     }
 
     /**
@@ -44,13 +56,9 @@ class AddressController extends Controller
      * @param  \App\Models\Users  $users
      * @return \Illuminate\Http\Response
      */
-    public function show(Address $users)
+    public function show(Request $request)
     {
-        // $school = Auth::user()->school_id;
-
-
-
-        return Address::all();
+        //
     }
 
     /**
@@ -59,7 +67,7 @@ class AddressController extends Controller
      * @param  \App\Models\Users  $users
      * @return \Illuminate\Http\Response
      */
-    public function edit(Address $users)
+    public function edit(Request $request)
     {
         //
     }
@@ -71,7 +79,7 @@ class AddressController extends Controller
      * @param  \App\Models\Users  $users
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Address $users)
+    public function update(Request $request)
     {
         //
     }
@@ -82,7 +90,7 @@ class AddressController extends Controller
      * @param  \App\Models\Users  $users
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Address $users)
+    public function destroy(Request $request)
     {
         //
     }

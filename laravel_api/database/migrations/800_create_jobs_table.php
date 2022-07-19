@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('date');
             $table->string('time_boundries');
             $table->timestamps();
+            
             $table->foreignIdFor(User::class, column:'admin_id'); //unsure if this will work
             $table->foreignIdFor(User::class, column:'supply_id'); //ditto
             $table->foreignIdFor(Subject::class);
