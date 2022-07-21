@@ -21,7 +21,7 @@ class NavDrawer extends StatelessWidget {
             children: [
              DrawerHeader(
               decoration: const BoxDecoration(
-              color: Colors.blue,
+              color: Colors.green,
             ),
               child: Column(
                 children:  [
@@ -35,18 +35,18 @@ class NavDrawer extends StatelessWidget {
                 ],
               ),
             ),
-            const ListTile(
-              title: Text('User name'),
-            ),
             ListTile(
-              title: const Text('Jobs'),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const PostsScreen()));
-              },
+              title: Text(' ${auth.user.email}', style: TextStyle(color: Colors.green),),
             ),
+            // ListTile(
+            //   title: const Text('Jobs'),
+            //   onTap: () {
+            //     Navigator.push(
+            //         context,
+            //         MaterialPageRoute(
+            //             builder: (context) => const PostsScreen()));
+            //   },
+            // ),
             ListTile(
               title: const Text('Logout'),
               leading: const Icon(Icons.logout),

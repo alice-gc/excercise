@@ -76,6 +76,7 @@ class _LoginState extends State<LoginScreen> {
                           hintText: 'you@somewhere.com',
                         ),
                         onSaved: (value) {
+                          
                           _email = value!;
                         }),
                     TextFormField(

@@ -66,7 +66,8 @@ class RegisterState extends State<RegisterScreen> {
                     TextFormField(
                         decoration:
                             const InputDecoration(labelText: 'Password'),
-                        onSaved: (value) {
+                        obscureText: true,
+                        onSaved: (value) { 
                           _password = value!;
                         }),
                   

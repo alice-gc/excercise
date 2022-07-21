@@ -74,10 +74,15 @@ class _MyHomePageState extends State<MyHomePage> {
         body: Center(child: Consumer<Auth>(builder: (context, auth, child) {
           if (auth.authenticated) {
             //main screen
+          }else{          
+            
+            return const Text('Please Login / Register to continue',
+              style: TextStyle(color: Colors.black, fontSize: 22));
           }
 
-          return const Text('Please Login / Register to continue',
+          return const Text('...',
               style: TextStyle(color: Colors.black, fontSize: 22));
+              
         })));
   }
 }
