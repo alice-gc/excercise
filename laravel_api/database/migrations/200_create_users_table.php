@@ -21,10 +21,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('preferred_name')->nullable();
-            $table->string('phone')->nullable();
-            $table->foreignIdFor(School::class)->nullable();
-            $table->foreignIdFor(CustomRole::class)->nullable();
+
             $table->rememberToken();
             $table->timestamps();
         });

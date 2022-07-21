@@ -1,15 +1,12 @@
 // import 'dart:html';
 // import 'dart:js';
 
-import 'package:blwm_app/screens/school_home_screen.dart';
-import 'package:blwm_app/screens/teacher_home_screen.dart';
 import 'package:blwm_app/services/auth.dart';
 import 'package:blwm_app/screens/home_screen.dart';
 import 'package:blwm_app/widgets/nav_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-import 'package:blwm_app/request_form.dart';
 import 'package:blwm_app/school.dart';
 
 import 'package:provider/provider.dart';
@@ -76,12 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
         drawer: NavDrawer(),
         body: Center(child: Consumer<Auth>(builder: (context, auth, child) {
           if (auth.authenticated) {
-            if (auth.user.customRoleId == 1) {
-              // Teacher page
-              return TeacherHomeScreen();
-            } else {
-              return SchoolHomeScreen();
-            }
+            //main screen
           }
 
           return const Text('Please Login / Register to continue',

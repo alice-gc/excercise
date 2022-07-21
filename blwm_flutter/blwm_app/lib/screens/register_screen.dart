@@ -18,30 +18,15 @@ class RegisterState extends State<RegisterScreen> {
   final _formKey = GlobalKey<FormState>();
   late String _email;
   late String _password;
-  late int _custom_role_id;
 
-  String dropDownValue = 'Teacher';
-  var roles = [
-    'Teacher',
-    'School',
-  ];
-
-  int getRoleIdFromSelection(String selection) {
-    if (selection == 'Teacher') {
-      return 1;
-    }
-    return 2;
-  }
 
   void submit() {
     try {
       // Register user first
-      _custom_role_id = getRoleIdFromSelection(dropDownValue);
       
       Provider.of<Auth>(context, listen: false).register(credentials: {
         'email': _email,
         'password': _password,
-        'custom_role_id': _custom_role_id
       });
 
       // Login new user
@@ -84,36 +69,7 @@ class RegisterState extends State<RegisterScreen> {
                         onSaved: (value) {
                           _password = value!;
                         }),
-                    SizedBox(height: 10),
-                    Row(
-                      children: [
-                        Text('Role :   ',
-                            style:
-                                TextStyle(color: Colors.black, fontSize: 17)),
-                        DropdownButton(
-                          // Initial Value
-                          value: dropDownValue,
-
-                          // Down Arrow Icon
-                          icon: const Icon(Icons.keyboard_arrow_down),
-
-                          // Array list of items
-                          items: roles.map((String roles) {
-                            return DropdownMenuItem(
-                              value: roles,
-                              child: Text(roles),
-                            );
-                          }).toList(),
-                          // After selecting the desired option,it will
-                          // change button value to selected value
-                          onChanged: (String? newValue) {
-                            setState(() {
-                              dropDownValue = newValue!;
-                            });
-                          },
-                        ),
-                      ],
-                    ),
+                  
                     SizedBox(height: 20),
                     SizedBox(
                         width: double.infinity,
