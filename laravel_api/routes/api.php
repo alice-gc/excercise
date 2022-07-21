@@ -44,16 +44,6 @@ Route::middleware('auth:sanctum')->get('/user/revoke', function (Request $reques
     return 'tokens are deleted';
 });
 
-
-
-
-
-
-
-
-
-
-
 Route::middleware('auth:sanctum')->get('/auth/user', function (Request $request) {
     return $request->user();
 });
@@ -64,9 +54,9 @@ Route::middleware('auth:sanctum')->get('/auth/login', function (Request $request
 
 
 
-Route::middleware('auth:sanctum')->get('/user/posts', function (Request $request) {
-    return $request->user()->posts;
-});
+// Route::middleware('auth:sanctum')->get('/user/posts', function (Request $request) {
+//     return $request->user()->posts;
+// });
 
 
 
