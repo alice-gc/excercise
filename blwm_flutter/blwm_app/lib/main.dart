@@ -1,16 +1,10 @@
-// import 'dart:html';
-// import 'dart:js';
-
 import 'package:blwm_app/services/auth.dart';
-import 'package:blwm_app/screens/home_screen.dart';
-import 'package:blwm_app/widgets/custom_excercise_button.dart';
-import 'package:blwm_app/widgets/recommended_excercise_button.dart';
+import 'package:blwm_app/widgets/recommended_exercise_button.dart';
+import 'package:blwm_app/widgets/custom_exercise_button.dart';
 import 'package:blwm_app/widgets/nav_drawer.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-
-import 'package:blwm_app/school.dart';
 
 import 'package:provider/provider.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -38,7 +32,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: const MyHomePage(title: 'excercise'),
+      home: const MyHomePage(title: 'exercise'),
     );
   }
 }
@@ -77,14 +71,12 @@ class _MyHomePageState extends State<MyHomePage> {
         body: Center(child: Consumer<Auth>(builder: (context, auth, child) {
           if (auth.authenticated) {
             //main screen
-            return ListView(
-            children: [
-              Column(
+            return  Column(
                 children:  const [ 
+                  
                 RecommendedButton(),
                 CustomButton(),
                ]
-        )]
         );
            
           } else {

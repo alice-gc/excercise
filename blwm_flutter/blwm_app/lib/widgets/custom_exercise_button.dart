@@ -1,4 +1,4 @@
-import 'package:blwm_app/screens/posts_screen.dart';
+import 'package:blwm_app/screens/recommended_setup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
@@ -13,14 +13,19 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton.extended(
-      label: Text('Recomended Settings'), // <-- Text
-      backgroundColor: Colors.teal.shade200,
-      icon: Icon(
+      label: const Text('Start Empty and create your own'), 
+      icon: const Icon(
         // <-- Icon
         Icons.build,
         size: 24.0,
       ),
-      onPressed: () {},
+      onPressed: () {
+        
+        Navigator.push(context,
+          MaterialPageRoute(
+          builder: (context) =>  const RecommendedSetup()));
+      
+      }
     );
   }
 }
