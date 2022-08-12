@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -14,9 +15,14 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        return User::where('id', Auth::id())->get();
     }
 
+    public function getUser(Request $request)
+    {
+
+        return $request->user();
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -24,7 +30,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+    //
     }
 
     /**
@@ -35,7 +41,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+    //
     }
 
     /**
@@ -46,7 +52,7 @@ class UserController extends Controller
      */
     public function show(User $users)
     {
-        //
+    //
     }
 
     /**
@@ -57,7 +63,7 @@ class UserController extends Controller
      */
     public function edit(User $users)
     {
-        //
+    //
     }
 
     /**
@@ -69,7 +75,7 @@ class UserController extends Controller
      */
     public function update(Request $request, User $users)
     {
-        //
+    //
     }
 
     /**
@@ -80,6 +86,6 @@ class UserController extends Controller
      */
     public function destroy(User $users)
     {
-        //
+    //
     }
 }

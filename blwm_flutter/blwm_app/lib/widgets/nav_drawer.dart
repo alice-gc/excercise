@@ -3,39 +3,46 @@ import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
 import '../services/auth.dart';
-import '../screens/login_screen.dart';
-import '../screens/register_screen.dart';
-
+import '../auth/login_screen.dart';
+import '../auth/register_screen.dart';
 
 class NavDrawer extends StatelessWidget {
   const NavDrawer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Drawer(
-      child: Consumer<Auth>(
+    return Drawer(child: Consumer<Auth>(
       builder: (context, auth, child) {
         if (auth.authenticated) {
-          return ListView(
-            children: [
-             DrawerHeader(
+          return ListView(children: [
+            DrawerHeader(
               decoration: const BoxDecoration(
-              color: Colors.green,
-            ),
+                color: Colors.green,
+              ),
               child: Column(
-                children:  [
-                    CircleAvatar(
-                      backgroundColor: Colors.white,
+                children: [
+                  CircleAvatar(
+                    backgroundColor: Colors.white,
                     radius: 30,
-                     ),
-                    SizedBox(height: 10,),
-                    Text('Hello ' + auth.user.email, style: const TextStyle(color: Colors.white),),
-                    SizedBox(height: 10,),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    'Hello ' + auth.user.email,
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
                 ],
               ),
             ),
             ListTile(
-              title: Text(' ${auth.user.email}', style: TextStyle(color: Colors.green),),
+              title: Text(
+                ' ${auth.user.email}',
+                style: TextStyle(color: Colors.green),
+              ),
             ),
             // ListTile(
             //   title: const Text('Jobs'),
@@ -50,9 +57,7 @@ class NavDrawer extends StatelessWidget {
               title: const Text('Logout'),
               leading: const Icon(Icons.logout),
               onTap: () {
-                    Provider.of<Auth>(context, listen: false)
-                                  .logout();
-
+                Provider.of<Auth>(context, listen: false).logout();
 
                 // Provider.of<Auth>(context, listen: false).logout();
               },
@@ -65,10 +70,8 @@ class NavDrawer extends StatelessWidget {
                   title: const Text('Login'),
                   leading: Icon(Icons.login),
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>  LoginScreen()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => LoginScreen()));
                   }),
               ListTile(
                   title: const Text('Register'),
@@ -77,7 +80,7 @@ class NavDrawer extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>  const RegisterScreen()));
+                            builder: (context) => const RegisterScreen()));
                   })
             ],
           );

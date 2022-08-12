@@ -1,6 +1,6 @@
 import 'package:blwm_app/services/auth.dart';
-import 'package:blwm_app/widgets/recommended_exercise_button.dart';
-import 'package:blwm_app/widgets/custom_exercise_button.dart';
+import 'package:blwm_app/widgets/buttons/recommended_exercise_button.dart';
+import 'package:blwm_app/widgets/buttons/custom_exercise_button.dart';
 import 'package:blwm_app/widgets/nav_drawer.dart';
 
 import 'package:flutter/material.dart';
@@ -71,14 +71,10 @@ class _MyHomePageState extends State<MyHomePage> {
         body: Center(child: Consumer<Auth>(builder: (context, auth, child) {
           if (auth.authenticated) {
             //main screen
-            return  Column(
-                children:  const [ 
-                  
-                RecommendedButton(),
-                CustomButton(),
-               ]
-        );
-           
+            return Column(children: const [
+              RecommendedButton(),
+              CustomButton(),
+            ]);
           } else {
             return const Text('Please Login / Register to continue',
                 style: TextStyle(color: Colors.black, fontSize: 22));

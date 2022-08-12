@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class Day extends StatelessWidget {
-  final String questionText;
+  final String dayText;
 
-  Day(this.questionText);
+  Day(this.dayText);
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +11,7 @@ class Day extends StatelessWidget {
       width: double.infinity,
       margin: const EdgeInsets.all(10),
       child: Text(
-        questionText,
+        dayText,
         style: TextStyle(fontSize: 28),
         textAlign: TextAlign.center,
       ),

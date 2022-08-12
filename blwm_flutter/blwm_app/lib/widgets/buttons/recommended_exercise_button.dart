@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:blwm_app/screens/recommended_setup.dart';
+import 'package:blwm_app/setup_exercises/recommended_setup.dart';
 
 class RecommendedButton extends StatelessWidget {
   const RecommendedButton({Key? key}) : super(key: key);
@@ -15,8 +15,7 @@ class RecommendedButton extends StatelessWidget {
       ),
       onPressed: () {
         Navigator.push(context,
-          MaterialPageRoute(
-          builder: (context) =>  const RecommendedSetup()));
+            MaterialPageRoute(builder: (context) => const RecommendedSetup()));
       },
     );
   }
