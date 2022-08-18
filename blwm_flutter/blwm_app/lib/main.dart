@@ -13,8 +13,6 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
-        // ChangeNotifierProvider(create: (_) => Auth(), child: MyApp()));
-
         ChangeNotifierProvider(create: (context) => Auth()),
       ],
       child: MyApp(),
@@ -23,12 +21,11 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  // MyApp({Key? key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: '??',
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
@@ -47,11 +44,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final Storage = new FlutterSecureStorage();
+  final storage = const FlutterSecureStorage();
 
   void _attemptAuthenication() async {
-    final key = await Storage.read(key: 'auth');
-
+    final key = await storage.read(key: 'auth');
     Provider.of<Auth>(this.context, listen: false).attempt(key!);
   }
 
@@ -79,9 +75,6 @@ class _MyHomePageState extends State<MyHomePage> {
             return const Text('Please Login / Register to continue',
                 style: TextStyle(color: Colors.black, fontSize: 22));
           }
-
-          return const Text('...',
-              style: TextStyle(color: Colors.black, fontSize: 22));
         })));
   }
 }

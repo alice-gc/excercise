@@ -2,73 +2,77 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import '../services/databaseService.dart';
-import 'package:blwm_app/widgets/nav_drawer.dart';
+import 'exercise_model.dart';
 
-class FullList extends StatelessWidget {
-  const FullList({Key? key}) : super(key: key);
+// import 'package:blwm_app/widgets/nav_drawer.dart';
 
+class FullListPage extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        primarySwatch: Colors.green,
-      ),
-      home: const FullListPage(title: 'Show All'),
-    );
+  State<FullListPage> createState() {
+    return FullListPageState();
   }
 }
 
-class FullListPage extends StatefulWidget {
-  const FullListPage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  State<FullListPage> createState() => _FullListPageState();
-}
-
-class _FullListPageState extends State<FullListPage> {
+class FullListPageState extends State<FullListPage> {
   ExerciseListing databaseService = ExerciseListing();
+
+  List<ExerciseListing> selected = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(widget.title),
+            title: const Text("All exercises from database"),
+            centerTitle: true,
+            automaticallyImplyLeading: true,
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back),
+              onPressed: () => Navigator.pop(context),
+            )),
+        body: SafeArea(
+            child: Container(
+                child: Column(children: [
+          Expanded(
+            child: FutureBuilder<List>(
+              future: databaseService.getAllExercises(),
+              builder: (context, snapshot) {
+                print(snapshot.data);
+                if (snapshot.hasData) {
+                  return ListView.builder(
+                    itemCount: snapshot.data?.length,
+                    itemBuilder: (context, i) {
+                      return ExerciseItem(
+                          snapshot.data![i]['name'], snapshot.data![i]['desc']);
+                    },
+                  );
+                } else if (snapshot.hasError) {
+                  return Column(children: [
+                    const Text('Failed to load'),
+                    const CircularProgressIndicator(),
+                    Text(snapshot.error.toString())
+                  ]);
+                }
+                return const CircularProgressIndicator();
+              },
+            ),
+          )
+        ]))));
+  }
+
+  Widget ExerciseItem(String name, String desc) {
+    // bool isSelected, int index) {
+    return Card(
+      child: ListTile(
+        title: Text(
+          name,
+          style: const TextStyle(fontSize: 30.0),
         ),
-        drawer: NavDrawer(),
-        body: Container(
-          child: FutureBuilder<List>(
-            future: databaseService.getAllExercises(),
-            builder: (context, snapshot) {
-              print(snapshot.data);
-              if (snapshot.hasData) {
-                return ListView.builder(
-                  itemCount: snapshot.data?.length,
-                  itemBuilder: (context, i) {
-                    return Card(
-                      child: ListTile(
-                        title: Text(
-                          snapshot.data![i]['name'],
-                          style: const TextStyle(fontSize: 30.0),
-                        ),
-                        subtitle: Text(
-                          snapshot.data![i]['desc'],
-                          style: const TextStyle(fontSize: 20.0),
-                        ),
-                      ),
-                    );
-                  },
-                );
-              } else if (snapshot.hasError) {
-                return Column(children: [
-                  const Text('Failed to load'),
-                  const CircularProgressIndicator(),
-                  Text(snapshot.error.toString())
-                ]);
-              }
-              return const CircularProgressIndicator();
-            },
-          ),
-        ));
+        subtitle: Text(
+          desc,
+          style: const TextStyle(fontSize: 20.0),
+        ),
+        onTap: () => print("click"),
+      ),
+    );
   }
 }

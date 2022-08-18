@@ -12,43 +12,42 @@ class RecommendedSetup extends StatefulWidget {
   }
 }
 
-//make a request
 class RecommendedSetupState extends State<RecommendedSetup> {
   final _weekData = const [
     {
       'day': 'Monday',
       'mark': '1/7',
-      'text': ['1'],
+      'number': '1',
     },
     {
       'day': 'Tuesday',
       'mark': '2/7',
-      'text': ['2'],
+      'number': '2',
     },
     {
       'day': 'Wednesday',
       'mark': '3/7',
-      'text': ['3'],
+      'number': '3',
     },
     {
       'day': 'Thursday',
       'mark': '4/7',
-      'text': ['4'],
+      'number': '4',
     },
     {
       'day': 'Friday',
       'mark': '5/7',
-      'text': ['5'],
+      'number': '5',
     },
     {
       'day': 'Saturday',
       'mark': '6/7',
-      'text': ['6'],
+      'number': '6',
     },
     {
       'day': 'Sunday',
       'mark': '7/7',
-      'text': ['7'],
+      'number': '7',
     },
   ];
 
@@ -65,6 +64,8 @@ class RecommendedSetupState extends State<RecommendedSetup> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Recommended Setup'),
+        centerTitle: true,
+        automaticallyImplyLeading: true,
       ),
       body: Center(
         child: Column(children: [
@@ -76,7 +77,7 @@ class RecommendedSetupState extends State<RecommendedSetup> {
                   weekDataIndex: _weekDataIndex,
                   weekData: _weekData,
                 )
-              : WeekSetupEnd(),
+              : const WeekSetupEnd(),
         ]),
       ),
     );

@@ -8,8 +8,8 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return FloatingActionButton.extended(
         label: const Text('Start Empty and create your own'),
+        backgroundColor: Colors.green.shade200,
         icon: const Icon(
-          // <-- Icon
           Icons.build,
           size: 24.0,
         ),

@@ -1,8 +1,10 @@
+import 'package:blwm_app/widgets/example_select.dart';
 import 'package:blwm_app/widgets/list_all_exercises.dart';
 import 'package:flutter/material.dart';
 
 import 'Day.dart';
 import 'next_save.dart';
+// import '../widgets/example.dart';
 
 class WeekExercise extends StatelessWidget {
   final List<Map<String, Object>> weekData;
@@ -35,10 +37,22 @@ class WeekExercise extends StatelessWidget {
           ),
           onPressed: () {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const FullList()));
+                MaterialPageRoute(builder: (context) => FullListPage()));
           },
         ),
-        const SizedBox(height: 400),
+        FloatingActionButton.extended(
+          label: const Text('example'),
+          backgroundColor: Color.fromARGB(76, 207, 206, 206),
+          icon: const Icon(
+            Icons.add,
+            size: 60,
+          ),
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => Example()));
+          },
+        ),
+        const SizedBox(height: 300),
         NextSave(nextDay, 'Next')
       ],
     );
