@@ -1,6 +1,6 @@
 class ExerciseModel {
+  int id;
   String name, desc;
-  bool isSelected;
 
-  ExerciseModel(this.name, this.desc, this.isSelected);
+  ExerciseModel(this.id, this.name, this.desc);
 }

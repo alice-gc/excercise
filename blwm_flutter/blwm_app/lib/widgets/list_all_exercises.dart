@@ -15,8 +15,17 @@ class FullListPage extends StatefulWidget {
 
 class FullListPageState extends State<FullListPage> {
   ExerciseListing databaseService = ExerciseListing();
+  // Color iconColor = Colors.grey.shade200;
+  List iconColors = [];
 
-  List<ExerciseListing> selected = [];
+  var isSelected = false;
+  List<ExerciseModel> selectedExercises = [];
+
+  @override
+  void initState() {
+    iconColors.clear();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,12 +48,14 @@ class FullListPageState extends State<FullListPage> {
                 print(snapshot.data);
                 if (snapshot.hasData) {
                   return ListView.builder(
-                    itemCount: snapshot.data?.length,
-                    itemBuilder: (context, i) {
-                      return ExerciseItem(
-                          snapshot.data![i]['name'], snapshot.data![i]['desc']);
-                    },
-                  );
+                      itemCount: snapshot.data?.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return ExerciseItem(
+                          snapshot.data![index]['name'],
+                          snapshot.data![index]['desc'],
+                          index,
+                        );
+                      });
                 } else if (snapshot.hasError) {
                   return Column(children: [
                     const Text('Failed to load'),
@@ -55,24 +66,67 @@ class FullListPageState extends State<FullListPage> {
                 return const CircularProgressIndicator();
               },
             ),
-          )
+          ),
+          selectedExercises.isNotEmpty
+              ? Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 25,
+                    vertical: 10,
+                  ),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: RaisedButton(
+                      color: Colors.green[700],
+                      child: Text(
+                        "Save (${selectedExercises.length})",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                        ),
+                      ),
+                      onPressed: () {
+                        print(
+                            "Save to current day: ${selectedExercises.length}");
+                      },
+                    ),
+                  ),
+                )
+              : Container(),
         ]))));
   }
 
-  Widget ExerciseItem(String name, String desc) {
-    // bool isSelected, int index) {
+  Widget ExerciseItem(String name, String desc, int index) {
+    iconColors.add(Colors.grey.shade200);
+
     return Card(
-      child: ListTile(
-        title: Text(
-          name,
-          style: const TextStyle(fontSize: 30.0),
+        child: ExpansionTile(
+      title: Text(
+        name,
+        style: const TextStyle(
+          fontSize: 30,
         ),
-        subtitle: Text(
-          desc,
-          style: const TextStyle(fontSize: 20.0),
-        ),
-        onTap: () => print("click"),
       ),
-    );
+      subtitle: Text(desc),
+      trailing: Icon(
+        Icons.check_circle,
+        color: iconColors[index],
+      ),
+      children: const <Widget>[
+        ListTile(title: Text('This is item')),
+      ],
+      onExpansionChanged: (bool expanded) {
+        setState(() {
+          if (expanded) {
+            iconColors[index] = Colors.green;
+            selectedExercises.add((ExerciseModel(index, name, desc)));
+          } else {
+            iconColors[index] = Colors.grey.shade200;
+            selectedExercises.removeWhere(
+              (element) => element.id == index,
+            );
+          }
+        });
+      },
+    ));
   }
 }

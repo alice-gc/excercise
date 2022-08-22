@@ -82,7 +82,7 @@ class _ExampleState extends State<Example> {
     return ListTile(
       title: Text(
         name,
-        style: TextStyle(
+        style: const TextStyle(
           fontWeight: FontWeight.w500,
         ),
       ),
