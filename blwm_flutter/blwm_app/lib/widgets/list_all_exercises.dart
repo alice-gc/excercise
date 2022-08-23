@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import '../services/databaseService.dart';
-import 'exercise_model.dart';
+import '../models/exercise_model.dart';
 
 // import 'package:blwm_app/widgets/nav_drawer.dart';
 
@@ -26,6 +26,8 @@ class FullListPageState extends State<FullListPage> {
     iconColors.clear();
     super.initState();
   }
+
+  final SaveExercises saveExercises = SaveExercises();
 
   @override
   Widget build(BuildContext context) {
@@ -87,6 +89,8 @@ class FullListPageState extends State<FullListPage> {
                       onPressed: () {
                         print(
                             "Save to current day: ${selectedExercises.length}");
+
+                        saveExercises.save(selectedExercises);
                       },
                     ),
                   ),

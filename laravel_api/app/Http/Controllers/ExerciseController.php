@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Exercise;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ExerciseController extends Controller
 {
@@ -21,17 +22,17 @@ class ExerciseController extends Controller
     public function getAll()
     {
         return Exercise::all();
-    // return 1;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function save_day(Request $request)
     {
-    //
+        // $request->validate([
+        //     'fmc_token' => 'required',
+        // ]);
+
+        // $id = Auth::user()->id;
+
+        return $request;
     }
 
     /**
