@@ -31,12 +31,13 @@ class ExerciseListingByDay {
 }
 
 class SaveExercises {
-  void saveToDay(List<ExerciseModel> data) async {
-    final List<String> placeholder = [];
+  void saveToDay(List<ExerciseModel> data, String day) async {
+    Map<String, String> placeholder = {'data': '1'};
+    // Map send_data = {'day': day};
 
     data.forEach((element) {
-      print(element.id);
-      placeholder.add(element.id.toString());
+      // print(element.id);
+      placeholder[element.id.toString()] = day;
     });
 
     print('placeholder');

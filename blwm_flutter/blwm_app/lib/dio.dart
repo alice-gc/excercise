@@ -13,7 +13,7 @@ Dio dio() {
       contentType: Headers.jsonContentType,
 
       //android mi1
-      baseUrl: 'http://192.168.10.102:8080/api/',
+      baseUrl: 'http://192.168.111.160:8080/api/',
       responseType: ResponseType.plain,
       headers: {
         'accept': 'application/json',

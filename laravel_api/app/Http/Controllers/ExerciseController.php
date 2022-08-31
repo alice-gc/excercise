@@ -55,27 +55,21 @@ class ExerciseController extends Controller
 
     public function save_day(Request $request)
     {
-        $data = $request->all();
+        $data_list = $request->all();
+        $i = 1;
+        foreach ($data_list as $data) {
+            if ($i > 0) {
+                $exercise = new WeeklyExercises();
+                $exercise->user_id = Auth::id();
+                $exercise->exercise_id = $data['id'];
+                $exercise->day = $data['day'];
 
-        foreach ($data as $id) {
-
-            $exercise = new WeeklyExercises();
-            // $exercise->user_id = $object['user_id'];
-            $exercise->user_id = Auth::id();
-            // $exercise->exercise_id = $id;
-            $exercise->exercise_id = $id;
-
-            $exercise->day = $id['day'];
-            // //     // $exercise = DB::table('exercises')
-            // //     //     ->where('id', '=', $id)->first()
-            // //     //     ->get();
-
-            // $this->create($exercise);
-            $exercise->save(); // saved to database
-
+                // $this->create($exercise);
+                $exercise->save(); // saved to database            }
+            }
         }
 
-        return $exercise;
+        return "added";
     }
 
 

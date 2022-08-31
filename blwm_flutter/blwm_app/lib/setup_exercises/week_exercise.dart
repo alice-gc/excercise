@@ -81,8 +81,12 @@ class WeekExercise extends StatelessWidget {
             size: 60,
           ),
           onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => FullListPage()));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => FullListPage(
+                          day: weekData[weekDataIndex]['day'] as String,
+                        )));
           },
         ),
         SizedBox(height: 10),

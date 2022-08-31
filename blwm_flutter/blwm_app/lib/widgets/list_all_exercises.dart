@@ -5,6 +5,13 @@ import '../services/databaseService.dart';
 import '../models/exercise_model.dart';
 
 class FullListPage extends StatefulWidget {
+  FullListPage({
+    Key? key,
+    required this.day,
+  }) : super(key: key);
+
+  String day;
+
   @override
   State<FullListPage> createState() {
     return FullListPageState();
@@ -92,7 +99,7 @@ class FullListPageState extends State<FullListPage> {
                         print(
                             "Save to current day: ${selectedExercises.length}");
 
-                        saveExercises.saveToDay(selectedExercises);
+                        saveExercises.saveToDay(selectedExercises, widget.day);
                         Navigator.pop(context);
                       },
                     ),
