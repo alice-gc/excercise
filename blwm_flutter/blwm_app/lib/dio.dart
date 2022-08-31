@@ -9,6 +9,9 @@ Dio dio() {
       //alacrity
       // baseUrl: 'http://192.168.10.102:8080/api/',
 
+      validateStatus: (_) => true,
+      contentType: Headers.jsonContentType,
+
       //android mi1
       baseUrl: 'http://192.168.10.102:8080/api/',
       responseType: ResponseType.plain,

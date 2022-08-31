@@ -63,7 +63,11 @@ class FullListPageState extends State<FullListPage> {
                     Text(snapshot.error.toString())
                   ]);
                 }
-                return const CircularProgressIndicator();
+                return Center(
+                    child: Text(
+                  "Loading...",
+                  style: TextStyle(color: Colors.black, fontSize: 28),
+                ));
               },
             ),
           ),

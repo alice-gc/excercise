@@ -59,6 +59,18 @@ class RecommendedSetupState extends State<RecommendedSetup> {
     });
   }
 
+  void _previousDay() {
+    setState(() {
+      if (_weekData.elementAt(_weekDataIndex - 1) == null) {
+        // _weekDataIndex = _weekDataIndex + 1; // If you want a boundary
+        // If you want to pop screen and go back
+        Navigator.pop(context);
+      } else {
+        _weekDataIndex = _weekDataIndex - 1;
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,17 +79,14 @@ class RecommendedSetupState extends State<RecommendedSetup> {
         centerTitle: true,
         automaticallyImplyLeading: true,
       ),
-      body: Center(
-        child: Column(children: [
-          _weekDataIndex < _weekData.length
-              ? WeekExercise(
-                  nextDay: _nextDay,
-                  weekDataIndex: _weekDataIndex,
-                  weekData: _weekData,
-                )
-              : const WeekSetupEnd(),
-        ]),
-      ),
+      body: _weekDataIndex < _weekData.length
+          ? WeekExercise(
+              nextDay: _nextDay,
+              previousDay: _previousDay,
+              weekDataIndex: _weekDataIndex,
+              weekData: _weekData,
+            )
+          : const WeekSetupEnd(),
     );
   }
 }
