@@ -23,8 +23,6 @@ class User extends Authenticatable
         'password',
         // 'preferred_name',
         // 'phone',
-        // 'custom_role_id',
-        // 'address',
     ];
 
     /**
@@ -46,27 +44,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-
-    public function customRoles()
+    public function weeklyExercises()
     {
-        return $this->hasMany(User::class);
+        return $this->belongsToMany(WeeklyExercises::class);
     }
 
-    public function subjects()
+    public function exercises()
     {
-        return $this->belongsToMany(Subject::class);
+        return $this->hasMany(Exercise::class);
     }
-
-    public function keystages()
-    {
-        return $this->belongsToMany(Keystage::class);
-    }
-
-
-    public function posts()
-    {
-        return $this->hasMany(Post::class);
-    }
-
-
 }

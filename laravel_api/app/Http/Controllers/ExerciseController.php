@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Exercise;
+use App\Models\User;
+use App\Models\WeeklyExercises;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ExerciseController extends Controller
 {
@@ -21,19 +25,59 @@ class ExerciseController extends Controller
 
     public function getAll()
     {
-        return Exercise::all();
+
+        $id = Auth::user()->id;
+        $exercises = Exercise::select('*')
+            ->where('user_id', '=', null)
+            ->orWhere('user_id', '=', $id)
+            ->get();
+
+        return $exercises;
     }
+
+    public function getAllByDay(Request $request)
+    {
+        $data = $request->all();
+        // return $request;
+
+        $id = Auth::user()->id;
+
+        $exercises = WeeklyExercises::select('*')
+            ->where('user_id', '=', $id)
+            ->where('day', '=', $data)
+            // ->where('day', '=', "Monday")
+            ->get();
+
+        return $exercises;
+
+    }
+
 
     public function save_day(Request $request)
     {
-        // $request->validate([
-        //     'fmc_token' => 'required',
-        // ]);
+        $data = $request->all();
 
-        // $id = Auth::user()->id;
+        foreach ($data as $id) {
 
-        return $request;
+            $exercise = new WeeklyExercises();
+            // $exercise->user_id = $object['user_id'];
+            $exercise->user_id = Auth::id();
+            // $exercise->exercise_id = $id;
+            $exercise->exercise_id = $id;
+
+            $exercise->day = $id['day'];
+            // //     // $exercise = DB::table('exercises')
+            // //     //     ->where('id', '=', $id)->first()
+            // //     //     ->get();
+
+            // $this->create($exercise);
+            $exercise->save(); // saved to database
+
+        }
+
+        return $exercise;
     }
+
 
     /**
      * Store a newly created resource in storage.

@@ -30,6 +30,14 @@ class DefaultExerciseSeeder extends Seeder
                 'name' => 'Excercise name 3',
                 'desc' => 'desription description',
             ],
+            [
+                'name' => 'Excercise name 4',
+                'desc' => 'desription description',
+            ],
+            [
+                'name' => 'Excercise name 5',
+                'desc' => 'desription description',
+            ],
 
         ];
 

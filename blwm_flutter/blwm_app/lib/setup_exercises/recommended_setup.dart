@@ -69,8 +69,6 @@ class RecommendedSetupState extends State<RecommendedSetup> {
       ),
       body: Center(
         child: Column(children: [
-          const Text('Recomended exercise setup',
-              style: TextStyle(color: Colors.black, fontSize: 22)),
           _weekDataIndex < _weekData.length
               ? WeekExercise(
                   nextDay: _nextDay,

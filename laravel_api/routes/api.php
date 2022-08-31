@@ -16,8 +16,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user/info', [UserController::class , 'index']);
     Route::get('/list/exercises', [ExerciseController::class , 'getAll']);
 
+    Route::post('/list/exercises/byDay', [ExerciseController::class , 'getAllByDay']);
+
     // save exercises to the day
     Route::post('/saveDay', [ExerciseController::class , 'save_day']);
+
+
 
 
 });

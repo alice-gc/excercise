@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import '../services/databaseService.dart';
 import '../models/exercise_model.dart';
 
-// import 'package:blwm_app/widgets/nav_drawer.dart';
-
 class FullListPage extends StatefulWidget {
   @override
   State<FullListPage> createState() {
@@ -90,7 +88,8 @@ class FullListPageState extends State<FullListPage> {
                         print(
                             "Save to current day: ${selectedExercises.length}");
 
-                        saveExercises.save(selectedExercises);
+                        saveExercises.saveToDay(selectedExercises);
+                        Navigator.pop(context);
                       },
                     ),
                   ),

@@ -5,23 +5,27 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Exercise extends Model
+class WeeklyExercises extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'desc',
-        'user',
+
+        'user_id',
+        'exercise_id',
+        'day',
     ];
+
 
     public function users()
     {
-        return $this->hasMany(User::class);
+        return $this->belongsToMany(User::class);
     }
 
-    public function weeklyExercises()
+    public function exercises()
     {
-        return $this->hasMany(WeeklyExercises::class);
+        return $this->belongsToMany(Exercise::class);
     }
+
+
 }
