@@ -3,16 +3,18 @@ import 'package:flutter/material.dart';
 import 'week_exercise.dart';
 import 'end.dart';
 
-class RecommendedSetup extends StatefulWidget {
-  const RecommendedSetup({Key? key}) : super(key: key);
+class ExerciseSetup extends StatefulWidget {
+  ExerciseSetup({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
-    return RecommendedSetupState();
+    return ExerciseSetupState();
   }
 }
 
-class RecommendedSetupState extends State<RecommendedSetup> {
+class ExerciseSetupState extends State<ExerciseSetup> {
   final _weekData = const [
     {
       'day': 'Monday',
@@ -62,8 +64,6 @@ class RecommendedSetupState extends State<RecommendedSetup> {
   void _previousDay() {
     setState(() {
       if (_weekData.elementAt(_weekDataIndex - 1) == null) {
-        // _weekDataIndex = _weekDataIndex + 1; // If you want a boundary
-        // If you want to pop screen and go back
         Navigator.pop(context);
       } else {
         _weekDataIndex = _weekDataIndex - 1;

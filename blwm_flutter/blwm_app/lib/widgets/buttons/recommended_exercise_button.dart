@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:blwm_app/setup_exercises/recommended_setup.dart';
+import 'package:blwm_app/setup_exercises/exercise_setup.dart';
+import '../../services/databaseService.dart';
 
 class RecommendedButton extends StatelessWidget {
-  const RecommendedButton({Key? key}) : super(key: key);
+  RecommendedButton({Key? key}) : super(key: key);
 
+  SaveExercises databaseService = SaveExercises();
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton.extended(
@@ -14,8 +16,10 @@ class RecommendedButton extends StatelessWidget {
         size: 24.0,
       ),
       onPressed: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const RecommendedSetup()));
+        databaseService.init();
+
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => ExerciseSetup()));
       },
     );
   }

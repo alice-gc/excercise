@@ -20,23 +20,61 @@ class DefaultExerciseSeeder extends Seeder
         $exerciseList = [
             [
                 'name' => 'Excercise name',
+                'desc' => 'Perhaps the most famous calisthenics exercise',
+            ],
+            [
+                'name' => 'Pushups',
                 'desc' => 'desription description',
             ],
             [
-                'name' => 'Excercise name 2',
+                'name' => 'Squats',
+                'desc' => 'desription description',
+
+            ],
+            [
+                'name' => 'Pullups',
+                'desc' => 'desription description',
+
+            ],
+            [
+                'name' => 'Bridges',
+                'desc' => 'desription description',
+
+            ],
+            [
+                'name' => 'Twist Holds',
                 'desc' => 'desription description',
             ],
             [
-                'name' => 'Excercise name 3',
+                'name' => 'Leg Raises',
                 'desc' => 'desription description',
+            ], [
+                'name' => 'stretching',
+                'desc' => 'relax and stretch',
             ],
             [
-                'name' => 'Excercise name 4',
-                'desc' => 'desription description',
+                'name' => 'Dips',
+                'desc' => 'Build functional pressing',
             ],
             [
-                'name' => 'Excercise name 5',
-                'desc' => 'desription description',
+                'name' => 'Lunges',
+                'desc' => 'Build lower body strength and mobility',
+            ],
+            [
+                'name' => 'Clutch Flags',
+                'desc' => 'Train the sides of your body',
+            ],
+            [
+                'name' => 'Explosives',
+                'desc' => 'Build speed and power',
+            ],
+            [
+                'name' => 'Calf Raises',
+                'desc' => 'Train your lower legs',
+            ],
+            [
+                'name' => 'Elbow Lever',
+                'desc' => 'Train your core',
             ],
 
         ];

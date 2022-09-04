@@ -3,11 +3,23 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import '../services/databaseService.dart';
 import '../models/exercise_model.dart';
+import 'week_exercise.dart';
+import '../widgets/buttons/add_new_exercise_button.dart';
+import '../widgets/add_form.dart';
 
 class FullListPage extends StatefulWidget {
+  // final List<Map<String, Object>> weekData;
+  // final int weekDataIndex;
+  // final VoidCallback nextDay;
+  // final VoidCallback previousDay;
+
   FullListPage({
     Key? key,
     required this.day,
+    // required this.weekData,
+    // required this.nextDay,
+    // required this.previousDay,
+    // required this.weekDataIndex,
   }) : super(key: key);
 
   String day;
@@ -52,12 +64,13 @@ class FullListPageState extends State<FullListPage> {
             child: FutureBuilder<List>(
               future: databaseService.getAllExercises(),
               builder: (context, snapshot) {
-                print(snapshot.data);
+                // print(snapshot.data);
                 if (snapshot.hasData) {
                   return ListView.builder(
                       itemCount: snapshot.data?.length,
                       itemBuilder: (BuildContext context, int index) {
                         return ExerciseItem(
+                          snapshot.data![index]['id'].toString(),
                           snapshot.data![index]['name'],
                           snapshot.data![index]['desc'],
                           index,
@@ -77,6 +90,19 @@ class FullListPageState extends State<FullListPage> {
                 ));
               },
             ),
+          ),
+          FloatingActionButton.extended(
+            label: const Text('add new exercise'),
+            backgroundColor: Colors.teal.shade200,
+            icon: const Icon(
+              Icons.build,
+              size: 24.0,
+            ),
+            onPressed: () async {
+              final value = await Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => AddForm()));
+              setState(() {});
+            },
           ),
           selectedExercises.isNotEmpty
               ? Padding(
@@ -98,8 +124,9 @@ class FullListPageState extends State<FullListPage> {
                       onPressed: () {
                         print(
                             "Save to current day: ${selectedExercises.length}");
-
+                        print(selectedExercises);
                         saveExercises.saveToDay(selectedExercises, widget.day);
+
                         Navigator.pop(context);
                       },
                     ),
@@ -109,7 +136,7 @@ class FullListPageState extends State<FullListPage> {
         ]))));
   }
 
-  Widget ExerciseItem(String name, String desc, int index) {
+  Widget ExerciseItem(String id, String name, String desc, int index) {
     iconColors.add(Colors.grey.shade200);
 
     return Card(
@@ -132,11 +159,11 @@ class FullListPageState extends State<FullListPage> {
         setState(() {
           if (expanded) {
             iconColors[index] = Colors.green;
-            selectedExercises.add((ExerciseModel(index, name, desc)));
+            selectedExercises.add((ExerciseModel(id, name, desc)));
           } else {
             iconColors[index] = Colors.grey.shade200;
             selectedExercises.removeWhere(
-              (element) => element.id == index,
+              (element) => element.id == id,
             );
           }
         });

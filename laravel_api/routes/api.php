@@ -11,6 +11,8 @@ use App\Http\Controllers\UserController;
 /* |-------------------------- | Mobile APP API Routes |-------------------------- | */
 
 Route::middleware('auth:sanctum')->group(function () {
+    Route::get('checkForExercises', [ExerciseController::class , 'checkForExercises']);
+
 
     Route::get('/auth/user', [UserController::class , 'getUser']);
     Route::get('/user/info', [UserController::class , 'index']);
@@ -18,8 +20,14 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('/list/exercises/byDay', [ExerciseController::class , 'getAllByDay']);
 
+    Route::delete('/list/exercises/DeletebyDay', [ExerciseController::class , 'DeleteByDay']);
+
     // save exercises to the day
     Route::post('/saveDay', [ExerciseController::class , 'save_day']);
+    Route::post('/save/init', [ExerciseController::class , 'save_init']);
+
+    // add new custom
+    Route::post('/list/exercises/addCustomExercise', [ExerciseController::class , 'addCustomExercise']);
 
 
 

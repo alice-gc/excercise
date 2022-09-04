@@ -18,6 +18,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('desc');
+            // $table->string('mainRoutine')->default(Null);
+            // for personal private custom exercises
             $table->foreignIdFor(User::class)->nullable();
             $table->timestamps();
         });

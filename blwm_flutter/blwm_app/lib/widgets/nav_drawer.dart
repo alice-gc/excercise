@@ -5,6 +5,8 @@ import 'package:provider/provider.dart';
 import '../services/auth.dart';
 import '../auth/login_screen.dart';
 import '../auth/register_screen.dart';
+import 'package:blwm_app/setup_exercises/exercise_setup.dart';
+import '../main.dart';
 
 class NavDrawer extends StatelessWidget {
   const NavDrawer({Key? key}) : super(key: key);
@@ -39,27 +41,30 @@ class NavDrawer extends StatelessWidget {
               ),
             ),
             ListTile(
-              title: Text(
-                ' ${auth.user.email}',
-                style: TextStyle(color: Colors.green),
-              ),
+                title: Text(
+                  ' ${auth.user.email}',
+                  style: TextStyle(color: Colors.green),
+                ),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const MyHomePage(
+                                title: 'my routine app',
+                              )));
+                }),
+            ListTile(
+              title: const Text('Setup/edit my routine'),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ExerciseSetup()));
+              },
             ),
-            // ListTile(
-            //   title: const Text('Jobs'),
-            //   onTap: () {
-            //     Navigator.push(
-            //         context,
-            //         MaterialPageRoute(
-            //             builder: (context) => const PostsScreen()));
-            //   },
-            // ),
             ListTile(
               title: const Text('Logout'),
               leading: const Icon(Icons.logout),
               onTap: () {
                 Provider.of<Auth>(context, listen: false).logout();
-
-                // Provider.of<Auth>(context, listen: false).logout();
               },
             ),
           ]);

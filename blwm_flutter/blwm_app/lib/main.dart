@@ -1,6 +1,8 @@
 import 'package:blwm_app/services/auth.dart';
 import 'package:blwm_app/widgets/buttons/recommended_exercise_button.dart';
-import 'package:blwm_app/widgets/buttons/custom_exercise_button.dart';
+import 'package:blwm_app/widgets/buttons/custom_exercise%20setup_button.dart';
+import 'package:blwm_app/services/databaseService.dart';
+
 import 'package:blwm_app/widgets/nav_drawer.dart';
 
 import 'package:flutter/material.dart';
@@ -51,6 +53,8 @@ class _MyHomePageState extends State<MyHomePage> {
     Provider.of<Auth>(this.context, listen: false).attempt(key!);
   }
 
+  ExerciseListing databaseService = ExerciseListing();
+
   @override
   void initState() {
     _attemptAuthenication();
@@ -67,10 +71,24 @@ class _MyHomePageState extends State<MyHomePage> {
         body: Center(child: Consumer<Auth>(builder: (context, auth, child) {
           if (auth.authenticated) {
             //main screen
-            return Column(children: const [
-              RecommendedButton(),
-              CustomButton(),
-            ]);
+
+            return FutureBuilder<List>(
+                future: databaseService.checkForExercises(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    if (snapshot.data!.length == 0) {
+                      return Column(children: [
+                        RecommendedButton(),
+                        CustomButton(),
+                      ]);
+                    } else {
+                      return const Text('Welcome Again!',
+                          style: TextStyle(color: Colors.black, fontSize: 22));
+                    }
+                  } else {
+                    return Center(child: CircularProgressIndicator());
+                  }
+                });
           } else {
             return const Text('Please Login / Register to continue',
                 style: TextStyle(color: Colors.black, fontSize: 22));

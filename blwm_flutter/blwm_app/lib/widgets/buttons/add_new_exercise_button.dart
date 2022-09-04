@@ -1,5 +1,6 @@
+import 'package:blwm_app/widgets/add_form.dart';
 import 'package:flutter/material.dart';
-import 'package:blwm_app/setup_exercises/recommended_setup.dart';
+import 'package:blwm_app/setup_exercises/exercise_setup.dart';
 
 class AddNewExerciseButton extends StatelessWidget {
   const AddNewExerciseButton({Key? key}) : super(key: key);
@@ -13,7 +14,10 @@ class AddNewExerciseButton extends StatelessWidget {
         Icons.build,
         size: 24.0,
       ),
-      onPressed: () {},
+      onPressed: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => AddForm()));
+      },
     );
   }
 }

@@ -15,7 +15,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('weeklyExercises', function (Blueprint $table) {
+        Schema::create('weekly_exercises', function (Blueprint $table) {
             $table->id();
 
             $table->foreignIdFor(User::class);

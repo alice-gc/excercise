@@ -1,4 +1,4 @@
-import 'package:blwm_app/setup_exercises/recommended_setup.dart';
+import 'package:blwm_app/setup_exercises/exercise_setup.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
@@ -14,10 +14,8 @@ class CustomButton extends StatelessWidget {
           size: 24.0,
         ),
         onPressed: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => const RecommendedSetup()));
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => ExerciseSetup()));
         });
   }
 }

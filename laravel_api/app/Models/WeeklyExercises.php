@@ -24,7 +24,7 @@ class WeeklyExercises extends Model
 
     public function exercises()
     {
-        return $this->belongsToMany(Exercise::class);
+        return $this->belongsTo(Exercise::class);
     }
 
 

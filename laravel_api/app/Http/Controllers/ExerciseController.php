@@ -12,15 +12,23 @@ use Illuminate\Support\Facades\DB;
 
 class ExerciseController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+
+    public function checkForExercises()
     {
-    // return Exercise::all();
-    // return 1;
+        $id = Auth::user()->id;
+
+        $exercise = WeeklyExercises::select('*')
+            ->where('user_id', '=', $id)
+            ->get();
+
+        // if ($exercise == 0) {
+        //     return array('response' => 0);
+        // }
+        // else {
+        //     return array('response' => 1);
+
+        // }
+        return $exercise;
     }
 
     public function getAll()
@@ -37,95 +45,152 @@ class ExerciseController extends Controller
 
     public function getAllByDay(Request $request)
     {
-        $data = $request->all();
-        // return $request;
 
+        $data = $request->all();
         $id = Auth::user()->id;
 
-        $exercises = WeeklyExercises::select('*')
+        $exercises_pivot = WeeklyExercises::select('*')
             ->where('user_id', '=', $id)
             ->where('day', '=', $data)
             // ->where('day', '=', "Monday")
             ->get();
 
-        return $exercises;
+        $exercises = [];
 
+        foreach ($exercises_pivot as $item) {
+
+            array_push($exercises,
+                Exercise::select('*')
+                ->where('id', $item->exercise_id)->get()->first());
+        }
+        return $exercises;
     }
 
 
     public function save_day(Request $request)
     {
         $data_list = $request->all();
-        $i = 1;
-        foreach ($data_list as $data) {
-            if ($i > 0) {
-                $exercise = new WeeklyExercises();
-                $exercise->user_id = Auth::id();
-                $exercise->exercise_id = $data['id'];
-                $exercise->day = $data['day'];
 
-                // $this->create($exercise);
-                $exercise->save(); // saved to database            }
-            }
+        // $keys = array_keys($data_list);
+        $arraySize = count($data_list);
+
+        for ($i = 0; $i < $arraySize - 1; $i++) {
+
+            $exercise = new WeeklyExercises();
+            $exercise->user_id = Auth::id();
+            $exercise->exercise_id = $data_list[$i];
+            $exercise->day = $data_list['day'];
+            $exercise->save();
         }
+        return "added";
+    }
+
+
+    public function addCustomExercise(Request $request)
+    {
+        $data = $request->all();
+
+        $exercise = new Exercise();
+        $exercise->user_id = Auth::id();
+        $exercise->name = $data['name'];
+        $exercise->desc = $data['desc'];
+        $exercise->save();
+
 
         return "added";
     }
 
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function save_init()
     {
-    //
+        $id = Auth::user()->id;
+
+        $routine = array(
+            // Monday
+            [
+                'day' => 'Monday',
+                'exercise_id' => 2,
+            ],
+            [
+                'day' => 'Monday',
+                'exercise_id' => 7
+            ],
+            // Tuesday
+            [
+                'day' => 'Tuesday',
+                'exercise_id' => 4
+            ],
+            [
+                'day' => 'Tuesday',
+                'exercise_id' => 3
+            ],
+            // Wednesday
+            [
+                'day' => 'Wednesday',
+                'exercise_id' => 5,
+            ],
+            [
+                'day' => 'Wednesday',
+                'exercise_id' => 6
+            ],
+            // Thursday
+            [
+                'day' => 'Thursday',
+                'exercise_id' => 2
+            ],
+            [
+                'day' => 'Thursday',
+                'exercise_id' => 7
+            ],
+            // Friday
+            [
+                'day' => 'Friday',
+                'exercise_id' => 4,
+            ],
+            [
+                'day' => 'Friday',
+                'exercise_id' => 3
+            ],
+            // Saturday
+            [
+                'day' => 'Saturday',
+                'exercise_id' => 5
+            ],
+            [
+                'day' => 'Saturday',
+                'exercise_id' => 6
+            ],
+            // Sunday
+            [
+                'day' => 'Sunday',
+                'exercise_id' => 8
+            ],
+        );
+
+
+        $arraySize = count($routine);
+
+        foreach ($routine as $element) {
+            $exercise = new WeeklyExercises();
+            $exercise->user_id = Auth::id();
+            $exercise->exercise_id = $element['exercise_id'];
+            $exercise->day = $element['day'];
+            $exercise->save();
+
+        }
+        return "init exercises added";
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\exercise  $exercise
-     * @return \Illuminate\Http\Response
-     */
-    public function show(exercise $exercise)
-    {
-    //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\exercise  $exercise
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(exercise $exercise)
+    public function DeleteByDay(Request $request)
     {
-    //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\exercise  $exercise
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, exercise $exercise)
-    {
-    //
-    }
+        $data = $request->all();
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\exercise  $exercise
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(exercise $exercise)
-    {
-    //
+        WeeklyExercises::Where('exercise_id', $data['index'])->first()
+            ->delete();
+
+        return "deleted";
+
     }
 }
