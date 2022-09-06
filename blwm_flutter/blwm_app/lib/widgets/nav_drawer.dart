@@ -1,61 +1,70 @@
-import 'package:blwm_app/screens/posts_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
 import '../services/auth.dart';
-import '../screens/login_screen.dart';
-import '../screens/register_screen.dart';
-
+import '../auth/login_screen.dart';
+import '../auth/register_screen.dart';
+import 'package:blwm_app/setup_exercises/exercise_setup.dart';
+import '../main.dart';
 
 class NavDrawer extends StatelessWidget {
   const NavDrawer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Drawer(
-      child: Consumer<Auth>(
+    return Drawer(child: Consumer<Auth>(
       builder: (context, auth, child) {
         if (auth.authenticated) {
-          return ListView(
-            children: [
-             DrawerHeader(
+          return ListView(children: [
+            DrawerHeader(
               decoration: const BoxDecoration(
-              color: Colors.blue,
-            ),
+                color: Colors.green,
+              ),
               child: Column(
-                children:  [
-                    CircleAvatar(
-                      backgroundColor: Colors.white,
+                children: [
+                  CircleAvatar(
+                    backgroundColor: Colors.white,
                     radius: 30,
-                     ),
-                    SizedBox(height: 10,),
-                    Text('Hello ' + auth.user.email, style: const TextStyle(color: Colors.white),),
-                    SizedBox(height: 10,),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    'Hello ' + auth.user.email,
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
                 ],
               ),
             ),
-            const ListTile(
-              title: Text('User name'),
-            ),
             ListTile(
-              title: const Text('Jobs'),
+                title: Text(
+                  ' ${auth.user.email}',
+                  style: TextStyle(color: Colors.green),
+                ),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const MyHomePage(
+                                title: 'my routine app',
+                              )));
+                }),
+            ListTile(
+              title: const Text('Setup/edit my routine'),
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const PostsScreen()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ExerciseSetup()));
               },
             ),
             ListTile(
               title: const Text('Logout'),
               leading: const Icon(Icons.logout),
               onTap: () {
-                    Provider.of<Auth>(context, listen: false)
-                                  .logout();
-
-
-                // Provider.of<Auth>(context, listen: false).logout();
+                Provider.of<Auth>(context, listen: false).logout();
               },
             ),
           ]);
@@ -66,10 +75,8 @@ class NavDrawer extends StatelessWidget {
                   title: const Text('Login'),
                   leading: Icon(Icons.login),
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>  LoginScreen()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => LoginScreen()));
                   }),
               ListTile(
                   title: const Text('Register'),
@@ -78,7 +85,7 @@ class NavDrawer extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>  const RegisterScreen()));
+                            builder: (context) => const RegisterScreen()));
                   })
             ],
           );

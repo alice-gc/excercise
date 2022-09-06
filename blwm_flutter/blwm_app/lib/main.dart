@@ -1,16 +1,12 @@
-// import 'dart:html';
-// import 'dart:js';
-
-import 'package:blwm_app/screens/school_home_screen.dart';
-import 'package:blwm_app/screens/teacher_home_screen.dart';
 import 'package:blwm_app/services/auth.dart';
-import 'package:blwm_app/screens/home_screen.dart';
+import 'package:blwm_app/widgets/buttons/recommended_exercise_button.dart';
+import 'package:blwm_app/widgets/buttons/custom_exercise%20setup_button.dart';
+import 'package:blwm_app/services/databaseService.dart';
+
 import 'package:blwm_app/widgets/nav_drawer.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-
-import 'package:blwm_app/request_form.dart';
-import 'package:blwm_app/school.dart';
 
 import 'package:provider/provider.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -19,8 +15,6 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
-        // ChangeNotifierProvider(create: (_) => Auth(), child: MyApp()));
-
         ChangeNotifierProvider(create: (context) => Auth()),
       ],
       child: MyApp(),
@@ -29,16 +23,15 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  // MyApp({Key? key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: '??',
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: const MyHomePage(title: 'excercise'),
+      home: const MyHomePage(title: 'exercise'),
     );
   }
 }
@@ -53,13 +46,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final Storage = new FlutterSecureStorage();
+  final storage = const FlutterSecureStorage();
 
   void _attemptAuthenication() async {
-    final key = await Storage.read(key: 'auth');
-
+    final key = await storage.read(key: 'auth');
     Provider.of<Auth>(this.context, listen: false).attempt(key!);
   }
+
+  ExerciseListing databaseService = ExerciseListing();
 
   @override
   void initState() {
@@ -73,19 +67,32 @@ class _MyHomePageState extends State<MyHomePage> {
         appBar: AppBar(
           title: Text(widget.title),
         ),
-        drawer: NavDrawer(),
+        drawer: const NavDrawer(),
         body: Center(child: Consumer<Auth>(builder: (context, auth, child) {
           if (auth.authenticated) {
-            if (auth.user.customRoleId == 1) {
-              // Teacher page
-              return TeacherHomeScreen();
-            } else {
-              return SchoolHomeScreen();
-            }
-          }
+            //main screen
 
-          return const Text('Please Login / Register to continue',
-              style: TextStyle(color: Colors.black, fontSize: 22));
+            return FutureBuilder<List>(
+                future: databaseService.checkForExercises(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    if (snapshot.data!.length == 0) {
+                      return Column(children: [
+                        RecommendedButton(),
+                        CustomButton(),
+                      ]);
+                    } else {
+                      return const Text('Welcome Again!',
+                          style: TextStyle(color: Colors.black, fontSize: 22));
+                    }
+                  } else {
+                    return Center(child: CircularProgressIndicator());
+                  }
+                });
+          } else {
+            return const Text('Please Login / Register to continue',
+                style: TextStyle(color: Colors.black, fontSize: 22));
+          }
         })));
   }
 }

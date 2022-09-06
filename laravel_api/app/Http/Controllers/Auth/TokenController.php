@@ -37,7 +37,7 @@ class TokenController extends Controller
     $validatedData = $request->validate([
       'email' => 'required|email',
       'password' => 'required',
-      'custom_role_id' => 'required'
+
 
     ]);
 

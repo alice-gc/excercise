@@ -4,25 +4,29 @@ import 'package:blwm_app/services/auth.dart';
 import 'package:dio/dio.dart';
 
 Dio dio() {
-  
   var dio = Dio(BaseOptions(
 
-    //alacrity
-    baseUrl: 'http://192.168.10.102:8000/api/',  
+      //alacrity
+      // baseUrl: 'http://192.168.10.102:8080/api/',
 
-    //android mi1
-      // baseUrl: 'http://192.168.7.160:8000/api/',
+      validateStatus: (_) => true,
+      contentType: Headers.jsonContentType,
+
+      //android mi1
+      baseUrl: 'http://192.168.111.160:8080/api/',
       responseType: ResponseType.plain,
       headers: {
         'accept': 'application/json',
       }));
 
   // ignore: avoid_single_cascade_in_expression_statements
-  dio.interceptors.add(InterceptorsWrapper(onRequest: (options, handler) {
-    requestInterceptor(options);
-    return handler.next(options);
-  },
-  ),
+  dio.interceptors.add(
+    InterceptorsWrapper(
+      onRequest: (options, handler) {
+        requestInterceptor(options);
+        return handler.next(options);
+      },
+    ),
   );
 
   return dio;
