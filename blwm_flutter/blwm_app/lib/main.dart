@@ -1,15 +1,14 @@
-import 'package:blwm_app/services/auth.dart';
-import 'package:blwm_app/widgets/buttons/recommended_exercise_button.dart';
-import 'package:blwm_app/widgets/buttons/custom_exercise%20setup_button.dart';
-import 'package:blwm_app/services/databaseService.dart';
-
-import 'package:blwm_app/widgets/nav_drawer.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-
 import 'package:provider/provider.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import 'package:blwm_app/services/auth.dart';
+import 'package:blwm_app/widgets/nav_drawer.dart';
+import 'package:blwm_app/widgets/color_custom_pallette.dart';
+import 'package:blwm_app/screens/home_screen_auth.dart';
+import 'package:blwm_app/screens/home_screen_unauth.dart';
 
 void main() {
   runApp(
@@ -17,7 +16,7 @@ void main() {
       providers: [
         ChangeNotifierProvider(create: (context) => Auth()),
       ],
-      child: MyApp(),
+      child: const MyApp(),
     ),
   );
 }
@@ -28,10 +27,18 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      // setup theme for the app
       theme: ThemeData(
-        primarySwatch: Colors.green,
+        // Define the default brightness and colors.
+        // dark and light mode
+        brightness: Brightness.light,
+        // custom primary swatch
+        primarySwatch: generateMaterialColor(Palette.evergreen),
+
+        // Define the default font family.
+        // textTheme: GoogleFonts.kreonTextTheme(),
       ),
-      home: const MyHomePage(title: 'exercise'),
+      home: const MyHomePage(title: 'Cup of Calisthenic'),
     );
   }
 }
@@ -53,45 +60,24 @@ class _MyHomePageState extends State<MyHomePage> {
     Provider.of<Auth>(this.context, listen: false).attempt(key!);
   }
 
-  ExerciseListing databaseService = ExerciseListing();
-
   @override
   void initState() {
     _attemptAuthenication();
     super.initState();
   }
 
+// check if user is authenticated
+// and load proper widget
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
-        ),
+        appBar: AppBar(centerTitle: true, title: Text(widget.title)),
         drawer: const NavDrawer(),
         body: Center(child: Consumer<Auth>(builder: (context, auth, child) {
           if (auth.authenticated) {
-            //main screen
-
-            return FutureBuilder<List>(
-                future: databaseService.checkForExercises(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    if (snapshot.data!.length == 0) {
-                      return Column(children: [
-                        RecommendedButton(),
-                        CustomButton(),
-                      ]);
-                    } else {
-                      return const Text('Welcome Again!',
-                          style: TextStyle(color: Colors.black, fontSize: 22));
-                    }
-                  } else {
-                    return Center(child: CircularProgressIndicator());
-                  }
-                });
+            return AuthHomeScreen();
           } else {
-            return const Text('Please Login / Register to continue',
-                style: TextStyle(color: Colors.black, fontSize: 22));
+            return UnAuthHomeScreen();
           }
         })));
   }
