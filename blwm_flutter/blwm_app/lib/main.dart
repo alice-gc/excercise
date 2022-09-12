@@ -38,15 +38,13 @@ class MyApp extends StatelessWidget {
         // Define the default font family.
         // textTheme: GoogleFonts.kreonTextTheme(),
       ),
-      home: const MyHomePage(title: 'Cup of Calisthenic'),
+      home: const MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
+  const MyHomePage({Key? key}) : super(key: key);
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -71,7 +69,8 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(centerTitle: true, title: Text(widget.title)),
+        appBar:
+            AppBar(centerTitle: true, title: const Text('Cup of Calisthenic')),
         drawer: const NavDrawer(),
         body: Center(child: Consumer<Auth>(builder: (context, auth, child) {
           if (auth.authenticated) {

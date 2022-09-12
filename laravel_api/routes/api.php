@@ -17,6 +17,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/auth/user', [UserController::class , 'getUser']);
     Route::get('/user/info', [UserController::class , 'index']);
     Route::get('/list/exercises', [ExerciseController::class , 'getAll']);
+    Route::get('/list/exercises/user', [ExerciseController::class , 'getAllForUser']);
+
 
     Route::post('/list/exercises/byDay', [ExerciseController::class , 'getAllByDay']);
 

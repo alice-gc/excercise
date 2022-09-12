@@ -7,6 +7,9 @@ import '../auth/login_screen.dart';
 import '../auth/register_screen.dart';
 import 'package:blwm_app/setup_exercises/exercise_setup.dart';
 import 'package:blwm_app/widgets/color_custom_pallette.dart';
+import 'package:blwm_app/screens/today_view.dart';
+import 'package:blwm_app/screens/weekly_wiew.dart';
+
 import '../main.dart';
 
 class NavDrawer extends StatelessWidget {
@@ -40,14 +43,12 @@ class NavDrawer extends StatelessWidget {
                     "Hello" + ' ${auth.user.email}',
                     style: TextStyle(color: Palette.evergreen),
                   ),
-                  leading: const Icon(Icons.home),
+                  leading: const Icon(Icons.home, color: Palette.freshMint),
                   onTap: () {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const MyHomePage(
-                                  title: 'my routine app',
-                                )));
+                            builder: (context) => const MyHomePage()));
                   }),
             ),
             Card(
@@ -55,8 +56,12 @@ class NavDrawer extends StatelessWidget {
               // shadowColor: Palette.freshMint,
               child: ListTile(
                 title: const Text('View today'),
-                leading: const Icon(Icons.calendar_month),
-                onTap: () {},
+                leading: const Icon(Icons.calendar_month,
+                    color: Palette.roseyCheeks),
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => TodaysView()));
+                },
               ),
             ),
             Card(
@@ -64,7 +69,7 @@ class NavDrawer extends StatelessWidget {
               // shadowColor: Palette.freshMint,
               child: ListTile(
                 title: const Text('Edit routine'),
-                leading: const Icon(Icons.edit),
+                leading: const Icon(Icons.edit, color: Palette.roseyCheeks),
                 onTap: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => ExerciseSetup()));
@@ -74,11 +79,14 @@ class NavDrawer extends StatelessWidget {
             Card(
               elevation: 5,
               // shadowColor: Palette.freshMint,
-
               child: ListTile(
                 title: const Text('View weekly exercises'),
-                leading: const Icon(Icons.view_agenda),
-                onTap: () {},
+                leading:
+                    const Icon(Icons.view_agenda, color: Palette.roseyCheeks),
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => WeeklyView()));
+                },
               ),
             ),
             Card(
@@ -86,7 +94,7 @@ class NavDrawer extends StatelessWidget {
               // shadowColor: Palette.freshMint,
               child: ListTile(
                 title: const Text('Logout'),
-                leading: const Icon(Icons.logout),
+                leading: const Icon(Icons.logout, color: Palette.roseyCheeks),
                 onTap: () {
                   Provider.of<Auth>(context, listen: false).logout();
                 },

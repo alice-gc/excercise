@@ -12,14 +12,16 @@ class CustomButton extends StatelessWidget {
         height: 190,
         width: 290,
         child: FloatingActionButton.extended(
-            shape:
-                BeveledRectangleBorder(borderRadius: BorderRadius.circular(4)),
-            label: const Text('Start Empty and create your own'),
+            shape: BeveledRectangleBorder(
+                borderRadius: BorderRadius.circular(4),
+                side: BorderSide(color: Colors.white)),
+            label: Column(children: const [
+              Icon(Icons.build, size: 24.0, color: Palette.evergreen),
+              SizedBox(height: 15),
+              Text('Start Empty and create your own',
+                  style: TextStyle(color: Palette.evergreen, fontSize: 14)),
+            ]),
             backgroundColor: Palette.roseyCheeks,
-            icon: const Icon(
-              Icons.build,
-              size: 24.0,
-            ),
             onPressed: () {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => ExerciseSetup()));

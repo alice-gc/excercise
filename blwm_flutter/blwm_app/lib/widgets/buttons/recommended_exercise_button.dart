@@ -14,13 +14,20 @@ class RecommendedButton extends StatelessWidget {
         height: 190,
         width: 290,
         child: FloatingActionButton.extended(
-          shape: BeveledRectangleBorder(borderRadius: BorderRadius.circular(4)),
-          label: const Text('Recomended Settings'),
+          shape: BeveledRectangleBorder(
+              borderRadius: BorderRadius.circular(4),
+              side: BorderSide(color: Colors.white)),
+          label: Column(children: const [
+            Icon(
+              Icons.add_task,
+              size: 24.0,
+              color: Palette.evergreen,
+            ),
+            SizedBox(height: 15),
+            Text('Recommended Settings',
+                style: TextStyle(color: Palette.evergreen)),
+          ]),
           backgroundColor: Palette.freshMint,
-          icon: const Icon(
-            Icons.add_task,
-            size: 24.0,
-          ),
           onPressed: () {
             databaseService.init();
             Navigator.push(context,

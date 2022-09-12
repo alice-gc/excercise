@@ -4,22 +4,13 @@ import 'package:flutter/material.dart';
 import '../services/databaseService.dart';
 import '../models/exercise_model.dart';
 import 'week_exercise.dart';
-import '../widgets/buttons/add_new_exercise_button.dart';
 import '../widgets/add_form.dart';
+import 'package:blwm_app/widgets/color_custom_pallette.dart';
 
 class FullListPage extends StatefulWidget {
-  // final List<Map<String, Object>> weekData;
-  // final int weekDataIndex;
-  // final VoidCallback nextDay;
-  // final VoidCallback previousDay;
-
   FullListPage({
     Key? key,
     required this.day,
-    // required this.weekData,
-    // required this.nextDay,
-    // required this.previousDay,
-    // required this.weekDataIndex,
   }) : super(key: key);
 
   String day;
@@ -32,7 +23,6 @@ class FullListPage extends StatefulWidget {
 
 class FullListPageState extends State<FullListPage> {
   ExerciseListing databaseService = ExerciseListing();
-  // Color iconColor = Colors.grey.shade200;
   List iconColors = [];
 
   var isSelected = false;
@@ -50,7 +40,7 @@ class FullListPageState extends State<FullListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-            title: const Text("All exercises from database"),
+            title: const Text("All exercises"),
             centerTitle: true,
             automaticallyImplyLeading: true,
             leading: IconButton(
@@ -91,19 +81,22 @@ class FullListPageState extends State<FullListPage> {
               },
             ),
           ),
-          FloatingActionButton.extended(
-            label: const Text('add new exercise'),
-            backgroundColor: Colors.teal.shade200,
-            icon: const Icon(
-              Icons.build,
-              size: 24.0,
-            ),
-            onPressed: () async {
-              final value = await Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => AddForm()));
-              setState(() {});
-            },
-          ),
+          SizedBox(
+              height: 50,
+              width: 150,
+              child: FloatingActionButton.extended(
+                label: const Text('add new'),
+                backgroundColor: Palette.roseyCheeks,
+                icon: const Icon(
+                  Icons.add,
+                  size: 24.0,
+                ),
+                onPressed: () async {
+                  final value = await Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => AddForm()));
+                  setState(() {});
+                },
+              )),
           selectedExercises.isNotEmpty
               ? Padding(
                   padding: const EdgeInsets.symmetric(
@@ -112,8 +105,7 @@ class FullListPageState extends State<FullListPage> {
                   ),
                   child: SizedBox(
                     width: double.infinity,
-                    child: RaisedButton(
-                      color: Colors.green[700],
+                    child: ElevatedButton(
                       child: Text(
                         "Save (${selectedExercises.length})",
                         style: TextStyle(
@@ -158,7 +150,7 @@ class FullListPageState extends State<FullListPage> {
       onExpansionChanged: (bool expanded) {
         setState(() {
           if (expanded) {
-            iconColors[index] = Colors.green;
+            iconColors[index] = Palette.evergreen;
             selectedExercises.add((ExerciseModel(id, name, desc)));
           } else {
             iconColors[index] = Colors.grey.shade200;

@@ -16,9 +16,7 @@ class _BackNextButtonState extends State<BackNextButton> {
   Widget build(BuildContext context) {
     return Container(
       width: 150,
-      child: RaisedButton(
-        color: Colors.blue,
-        textColor: Colors.white,
+      child: ElevatedButton(
         child: Text(widget.title),
         onPressed: widget.selectHandler,
       ),

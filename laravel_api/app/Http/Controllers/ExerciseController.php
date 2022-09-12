@@ -67,6 +67,39 @@ class ExerciseController extends Controller
     }
 
 
+    public function getAllForUser()
+    {
+
+        $id = Auth::user()->id;
+
+        $exercises_pivot = WeeklyExercises::select('*')
+            ->where('user_id', '=', $id)
+            ->get();
+
+        // $map = [
+        //     'Monday' => 1,
+        //     'Tuesday' => 2,
+        //     'Wednesday' => 3,
+        //     'Thursday' => 4,
+        //     'Friday' => 5,
+        //     'Saturday' => 6,
+        //     'Sunday' => 7,
+        // ];
+
+        // foreach ($exercises_pivot as $item) {
+
+        //     $item->day = $map[$item->day];
+
+        //     array_push($exercises, $item
+        //     );
+
+        // array_push($exercises,
+        //     Exercise::select('*')
+        //     ->where('id', $item->exercise_id)->get()->first());
+        // }
+        return $exercises_pivot;
+    }
+
     public function save_day(Request $request)
     {
         $data_list = $request->all();

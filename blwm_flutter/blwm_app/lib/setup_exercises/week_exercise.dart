@@ -1,9 +1,9 @@
 import 'dart:developer';
-
-import 'package:blwm_app/setup_exercises/list_all_exercises.dart';
 import 'package:flutter/material.dart';
 
-import 'Day.dart';
+import 'package:blwm_app/setup_exercises/list_all_exercises.dart';
+import 'package:blwm_app/widgets/color_custom_pallette.dart';
+import 'package:flutter/widgets.dart';
 import 'next_save.dart';
 import '../services/databaseService.dart';
 
@@ -50,11 +50,17 @@ class WeekExerciseState extends State<WeekExercise> {
     return SafeArea(
         child: Column(
       children: [
-        Day(
-          widget.weekData[widget.weekDataIndex]['day'] as String,
-        ),
-        Day(
-          widget.weekData[widget.weekDataIndex]['mark'] as String,
+        Container(
+          width: double.infinity,
+          margin: const EdgeInsets.all(10),
+          child: Text(
+            "${widget.weekData[widget.weekDataIndex]['day'] as String} ${widget.weekData[widget.weekDataIndex]['mark'] as String}",
+            style: const TextStyle(
+              fontSize: 28,
+              color: Palette.evergreen,
+            ),
+            textAlign: TextAlign.center,
+          ),
         ),
         FutureBuilder<List<dynamic>>(
           future: databaseService.getByDayExercises(
@@ -62,12 +68,26 @@ class WeekExerciseState extends State<WeekExercise> {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               if (snapshot.data!.length == 0) {
-                return Column(children: [
-                  const Text('Empty/free day'),
-                ]);
+                return SizedBox(
+                  height: 500,
+                  width: 375,
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Icon(
+                          Icons.beach_access,
+                          size: 64.0,
+                          color: Palette.wollySocks,
+                        ),
+                        SizedBox(height: 25),
+                        Text('Resting day',
+                            style: TextStyle(
+                                color: Palette.wollySocks, fontSize: 22)),
+                      ]),
+                );
               }
               return SizedBox(
-                  height: 450,
+                  height: 500,
                   width: 375,
                   child: SingleChildScrollView(
                       child: ListView.builder(
@@ -125,23 +145,40 @@ class WeekExerciseState extends State<WeekExercise> {
             return const CircularProgressIndicator();
           },
         ),
-        FloatingActionButton.extended(
-          label: const Text('Add Excercise'),
-          backgroundColor: Color.fromARGB(76, 207, 206, 206),
-          icon: const Icon(
-            Icons.add,
-            size: 60,
+        SizedBox(
+          height: 50,
+          width: 300,
+          child: OutlinedButton(
+            style: OutlinedButton.styleFrom(
+              primary: Colors.white,
+              // backgroundColor: Colors.teal,
+              side: BorderSide(color: Palette.roseyCheeks, width: 5),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Icon(
+                  Icons.add,
+                  size: 40,
+                  color: Palette.evergreen,
+                ),
+                Text('Add Excercise',
+                    style: TextStyle(
+                      color: Palette.evergreen,
+                    )),
+              ],
+            ),
+            onPressed: () async {
+              final value = await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => FullListPage(
+                            day: widget.weekData[widget.weekDataIndex]['day']
+                                as String,
+                          )));
+              setState(() {});
+            },
           ),
-          onPressed: () async {
-            final value = await Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => FullListPage(
-                          day: widget.weekData[widget.weekDataIndex]['day']
-                              as String,
-                        )));
-            setState(() {});
-          },
         ),
         SizedBox(height: 10),
         Center(
