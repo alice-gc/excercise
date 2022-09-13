@@ -1,9 +1,13 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import 'package:blwm_app/services/databaseService.dart';
+import 'package:blwm_app/widgets/color_custom_pallette.dart';
+
 import 'package:blwm_app/widgets/buttons/recommended_exercise_button.dart';
 import 'package:blwm_app/widgets/buttons/custom_exercise%20setup_button.dart';
+import 'package:blwm_app/widgets/today.dart';
 
 class AuthHomeScreen extends StatefulWidget {
   @override
@@ -12,6 +16,8 @@ class AuthHomeScreen extends StatefulWidget {
 
 class _AuthHomeScreenState extends State<AuthHomeScreen> {
   ExerciseListing databaseService = ExerciseListing();
+
+  DateTime date = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -24,27 +30,46 @@ class _AuthHomeScreenState extends State<AuthHomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     RecommendedButton(),
-                    SizedBox(height: 50),
-                    CustomButton(),
-
-                    // SizedBox(
-                    //   height: 100,
-                    //   width: 100,
-                    //   child: FloatingActionButton(
-                    //     child: Icon(Icons.add), //child widget inside this button
-                    //     onPressed: () {
-                    //       print("Button is pressed.");
-                    //       //task to execute when this button is pressed
-                    //     },
-                    //   ),
-                    // ),
+                    const SizedBox(height: 50),
+                    const CustomButton(),
                   ]);
             } else {
-              return const Text('Welcome Again!',
-                  style: TextStyle(color: Colors.black, fontSize: 22));
+              return Column(children: [
+                const SizedBox(
+                  height: 20.0,
+                ),
+                const Text('Welcome Again!',
+                    style: TextStyle(color: Palette.evergreen, fontSize: 22)),
+                const SizedBox(
+                  height: 20.0,
+                ),
+                SizedBox(
+                  height: 500,
+                  width: 350,
+                  child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      padding: const EdgeInsets.all(20.0),
+                      primary: Colors.white,
+                      // backgroundColor: Colors.teal,
+                      side: const BorderSide(
+                          color: Palette.roseyCheeks, width: 5),
+                    ),
+                    child: Column(
+                      children: [
+                        const Text('Todays Excercises',
+                            style: TextStyle(
+                              color: Palette.roseyCheeks,
+                            )),
+                        TodayWidget(),
+                      ],
+                    ),
+                    onPressed: () async {},
+                  ),
+                ),
+              ]);
             }
           } else {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: const CircularProgressIndicator());
           }
         });
   }

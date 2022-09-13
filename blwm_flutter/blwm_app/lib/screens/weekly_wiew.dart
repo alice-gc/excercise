@@ -25,19 +25,6 @@ class WeeklyViewState extends State<WeeklyView> {
     super.initState();
   }
 
-  List _elements = [
-    {'topicName': 'GridView.count', 'group': 'GridView Type'},
-    {'topicName': 'GridView.builder', 'group': 'GridView Type'},
-    {'topicName': 'GridView.custom', 'group': 'GridView Type'},
-    {'topicName': 'GridView.extent', 'group': 'GridView Type'},
-    {'topicName': 'ListView.builder', 'group': 'ListView Type'},
-    {'topicName': 'StatefulWidget', 'group': 'Type of Widget'},
-    {'topicName': 'ListView', 'group': 'ListView Type'},
-    {'topicName': 'ListView.separated', 'group': 'ListView Type'},
-    {'topicName': 'ListView.custom', 'group': 'ListView Type'},
-    {'topicName': 'StatelessWidget', 'group': 'Type of Widget'},
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,6 +40,7 @@ class WeeklyViewState extends State<WeeklyView> {
             print(DateFormat('EEEE').format(date));
 
             if (snapshot.hasData) {
+              log("DATA " + snapshot.data.toString());
               if (snapshot.data!.isEmpty) {
                 return SizedBox(
                   height: 500,
@@ -61,46 +49,52 @@ class WeeklyViewState extends State<WeeklyView> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: const [
                         Icon(
-                          Icons.beach_access,
+                          Icons.sports_gymnastics,
                           size: 64.0,
                           color: Palette.wollySocks,
                         ),
                         SizedBox(height: 25),
-                        Text('Resting day',
+                        Text('Please add exercises first',
                             style: TextStyle(
                                 color: Palette.wollySocks, fontSize: 22)),
                       ]),
                 );
               }
+
               return GroupedListView<dynamic, String>(
                 elements: snapshot.data!,
-                groupBy: (element) => element['day'],
-                // groupComparator: (value1, value2) => value2.compareTo(value1),
-                // itemComparator: (item1, item2) =>
-                //     item1['day'].compareTo(item2['day']),
-                // order: GroupedListOrder.DESC,
-                groupSeparatorBuilder: (String value) => Padding(
+                groupBy: (element) => element['no'].toString(),
+                groupComparator: (value1, value2) => value2.compareTo(value1),
+                itemComparator: (item1, item2) =>
+                    item1['day'].compareTo(item2['day']),
+                order: GroupedListOrder.DESC,
+                groupHeaderBuilder: (element) => Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    value,
-                    textAlign: TextAlign.left,
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    element['day'],
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Palette.evergreen),
                   ),
                 ),
                 itemBuilder: (c, element) {
                   return Card(
                     elevation: 8.0,
-                    margin: new EdgeInsets.symmetric(
+                    margin: const EdgeInsets.symmetric(
                         horizontal: 10.0, vertical: 6.0),
-                    child: Container(
-                      child: ListTile(
-                        contentPadding: EdgeInsets.symmetric(
-                            horizontal: 20.0, vertical: 10.0),
-                        //leading: Icon(Icons.account_circle),
-                        title: Text(
-                          element['exercise_id'].toString(),
-                          style: TextStyle(fontSize: 16),
-                        ),
+                    child: ListTile(
+                      contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 20.0, vertical: 10.0),
+                      //leading: Icon(Icons.account_circle),
+                      title: Text(
+                        element['exercise']['name'].toString(),
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                      subtitle: Text(
+                        element['exercise']['desc'].toString(),
+                        style: const TextStyle(fontSize: 16),
                       ),
                     ),
                   );

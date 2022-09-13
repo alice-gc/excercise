@@ -83,7 +83,7 @@ class FullListPageState extends State<FullListPage> {
           ),
           SizedBox(
               height: 50,
-              width: 150,
+              width: 350,
               child: FloatingActionButton.extended(
                 label: const Text('add new'),
                 backgroundColor: Palette.roseyCheeks,
@@ -132,34 +132,48 @@ class FullListPageState extends State<FullListPage> {
     iconColors.add(Colors.grey.shade200);
 
     return Card(
+        elevation: 8.0,
+        margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
+
+        // child: ListTile(
+        //   contentPadding:
+        //       const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+        //   //leading: Icon(Icons.account_circle),
+        //   title: Text(
+        //     element['exercise']['name'].toString(),
+        //     style: const TextStyle(fontSize: 16),
+        //   ),
+        //   subtitle: Text(
+        //     element['exercise']['desc'].toString(),
+        //     style: const TextStyle(fontSize: 16),
+        //   ),
+        // ),
+
         child: ExpansionTile(
-      title: Text(
-        name,
-        style: const TextStyle(
-          fontSize: 30,
-        ),
-      ),
-      subtitle: Text(desc),
-      trailing: Icon(
-        Icons.check_circle,
-        color: iconColors[index],
-      ),
-      children: const <Widget>[
-        ListTile(title: Text('This is item')),
-      ],
-      onExpansionChanged: (bool expanded) {
-        setState(() {
-          if (expanded) {
-            iconColors[index] = Palette.evergreen;
-            selectedExercises.add((ExerciseModel(id, name, desc)));
-          } else {
-            iconColors[index] = Colors.grey.shade200;
-            selectedExercises.removeWhere(
-              (element) => element.id == id,
-            );
-          }
-        });
-      },
-    ));
+          title: Text(
+            name,
+            style: const TextStyle(
+              fontSize: 30,
+            ),
+          ),
+          subtitle: Text(desc),
+          trailing: Icon(
+            Icons.check_circle,
+            color: iconColors[index],
+          ),
+          onExpansionChanged: (bool expanded) {
+            setState(() {
+              if (expanded) {
+                iconColors[index] = Palette.evergreen;
+                selectedExercises.add((ExerciseModel(id, name, desc)));
+              } else {
+                iconColors[index] = Colors.grey.shade200;
+                selectedExercises.removeWhere(
+                  (element) => element.id == id,
+                );
+              }
+            });
+          },
+        ));
   }
 }

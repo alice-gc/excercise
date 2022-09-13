@@ -76,27 +76,32 @@ class ExerciseController extends Controller
             ->where('user_id', '=', $id)
             ->get();
 
-        // $map = [
-        //     'Monday' => 1,
-        //     'Tuesday' => 2,
-        //     'Wednesday' => 3,
-        //     'Thursday' => 4,
-        //     'Friday' => 5,
-        //     'Saturday' => 6,
-        //     'Sunday' => 7,
-        // ];
 
-        // foreach ($exercises_pivot as $item) {
 
-        //     $item->day = $map[$item->day];
+        $map = [
+            'Monday' => 1,
+            'Tuesday' => 2,
+            'Wednesday' => 3,
+            'Thursday' => 4,
+            'Friday' => 5,
+            'Saturday' => 6,
+            'Sunday' => 7,
+        ];
 
-        //     array_push($exercises, $item
-        //     );
+        $exercises = [];
+
+        foreach ($exercises_pivot as $item) {
+            $item->no = $map[$item->day];
+            $item->exercise =
+                Exercise::select('*')
+                ->where('id', $item->exercise_id)->get()->first();
+
+            array_push($exercises, $item);
 
         // array_push($exercises,
         //     Exercise::select('*')
         //     ->where('id', $item->exercise_id)->get()->first());
-        // }
+        }
         return $exercises_pivot;
     }
 

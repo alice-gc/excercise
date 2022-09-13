@@ -99,15 +99,14 @@ class WeekExerciseState extends State<WeekExercise> {
                           child: Card(
                         child: Row(
                           children: [
+                            SizedBox(width: 15),
                             Container(
-                                width: 140,
-                                child: Text(
-                                  snapshot.data![i]['name'],
-                                  style: const TextStyle(fontSize: 30.0),
-                                )),
+                                width: 225,
+                                child: Text(snapshot.data![i]['name'],
+                                    style: const TextStyle(fontSize: 22.0))),
                             SizedBox(width: 50),
                             Container(
-                              width: 170,
+                              width: 50,
                               child: IconButton(
                                   onPressed: () => {
                                         log("Card selected = " + i.toString()),
@@ -148,25 +147,12 @@ class WeekExerciseState extends State<WeekExercise> {
         SizedBox(
           height: 50,
           width: 300,
-          child: OutlinedButton(
-            style: OutlinedButton.styleFrom(
-              primary: Colors.white,
-              // backgroundColor: Colors.teal,
-              side: BorderSide(color: Palette.roseyCheeks, width: 5),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Icon(
-                  Icons.add,
-                  size: 40,
-                  color: Palette.evergreen,
-                ),
-                Text('Add Excercise',
-                    style: TextStyle(
-                      color: Palette.evergreen,
-                    )),
-              ],
+          child: FloatingActionButton.extended(
+            label: const Text('Add Excercise'),
+            backgroundColor: Palette.roseyCheeks,
+            icon: const Icon(
+              Icons.add,
+              size: 40,
             ),
             onPressed: () async {
               final value = await Navigator.push(
