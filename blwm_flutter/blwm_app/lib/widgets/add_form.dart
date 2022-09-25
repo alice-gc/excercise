@@ -51,8 +51,7 @@ class _AddFormState extends State<AddForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar:
-            AppBar(title: const Text('Input Details of your custom Exercise')),
+        appBar: AppBar(title: const Text('Add new exercise')),
         body: Padding(
           padding: const EdgeInsets.all(25),
           child: SingleChildScrollView(

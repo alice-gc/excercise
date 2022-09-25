@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * This file is run on migrating the database 
+ * Creates table to hold user data 
+ *
+ */
+
 use App\Models\CustomRole;
 use App\Models\School;
 use Illuminate\Database\Migrations\Migration;

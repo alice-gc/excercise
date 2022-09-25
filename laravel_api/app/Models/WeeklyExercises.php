@@ -14,6 +14,9 @@ class WeeklyExercises extends Model
         'user_id',
         'exercise_id',
         'day',
+
+        'no',
+        'exercise'
     ];
 
 

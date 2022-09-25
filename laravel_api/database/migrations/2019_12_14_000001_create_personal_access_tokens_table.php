@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * This file is run on migrating the database 
+ * Creates table to hold device token ID needed
+ * for loging and registering from mobile
+ *
+ */
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
