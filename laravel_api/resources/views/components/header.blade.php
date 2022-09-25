@@ -25,7 +25,8 @@
           </ul>
 
           <ul class="nav-item gx-0 px-1"><a class="btn  justify-content-center" role="button"
-              href="{{ route('github') }}" style="background-color: #CFE4C4;  color: black; width: 120px">github
+              href="https://github.com/alice-gc/excercise"
+              style="background-color: #CFE4C4;  color: black; width: 120px">github
               repo</a>
           </ul>
 
