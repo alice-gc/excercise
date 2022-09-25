@@ -1,5 +1,13 @@
 <?php
 
+
+/**
+ * This file is run on migrating the database 
+ * Creates table to hold weekly routine
+ *
+ */
+
+
 use App\Models\Exercise;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;

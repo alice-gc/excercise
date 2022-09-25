@@ -37,14 +37,11 @@ class TokenController extends Controller
     $validatedData = $request->validate([
       'email' => 'required|email',
       'password' => 'required',
-
-
     ]);
 
     $validatedData['password'] = Hash::make($validatedData['password']);
 
     User::updateOrCreate($validatedData);
-
 
     if (!auth()->attempt($request->only('email', 'password'))) {
       throw new AuthenticationException();
