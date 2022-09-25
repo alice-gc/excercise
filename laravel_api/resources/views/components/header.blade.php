@@ -35,8 +35,8 @@
               license</a>
           </ul>
 
-          <ul class="nav-item gx-0 px-1"><a class="btn  justify-content-center" role="button"
-              href="{{ route('readme') }}" style="background-color: #CFE4C4;  color: black; width: 120px">mobile
+          <ul class="nav-item gx-0 px-1"><a class="btn  justify-content-center" role="button" href="https://play.google.com/store/apps/details?id=live.cupof.exercise
+" style="background-color: #CFE4C4;  color: black; width: 120px">mobile
               App</a>
           </ul>
 
