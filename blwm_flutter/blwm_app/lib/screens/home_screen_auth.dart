@@ -44,7 +44,7 @@ class _AuthHomeScreenState extends State<AuthHomeScreen> {
                   height: 20.0,
                 ),
                 SizedBox(
-                  height: 500,
+                  height: 560,
                   width: 350,
                   child: OutlinedButton(
                     style: OutlinedButton.styleFrom(
