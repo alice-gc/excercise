@@ -1,4 +1,4 @@
-package com.example.blwm_app
+package live.cupof.exercise
 
 import io.flutter.embedding.android.FlutterActivity
 
