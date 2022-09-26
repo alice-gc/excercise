@@ -75,7 +75,7 @@ class ExerciseSetupState extends State<ExerciseSetup> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Recommended Setup'),
+        title: const Text('Routine Setup'),
         centerTitle: true,
         automaticallyImplyLeading: true,
       ),

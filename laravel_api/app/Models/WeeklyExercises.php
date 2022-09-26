@@ -5,6 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+// This model defines user weekly routine. Table WeeklyExercises holds all exercises that user has assigned to weekly exercise routine. It works as pivot table between User and Exercise list. 
+// WeeklyExercises model defines relations: 
+// belongs to many User objects 
 class WeeklyExercises extends Model
 {
     use HasFactory;
@@ -14,6 +17,9 @@ class WeeklyExercises extends Model
         'user_id',
         'exercise_id',
         'day',
+
+        'no',
+        'exercise'
     ];
 
 

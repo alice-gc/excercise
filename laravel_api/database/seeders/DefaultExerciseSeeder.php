@@ -1,5 +1,10 @@
 <?php
-
+/**
+ * Adds entries to the database that contains 
+ * Core CALISTHENICS ROUTINE exercises
+ * as well as additional calisthenic exercises that user may wish to add
+ * 
+ */
 namespace Database\Seeders;
 
 use App\Models\Exercise;
@@ -19,35 +24,31 @@ class DefaultExerciseSeeder extends Seeder
 
         $exerciseList = [
             [
-                'name' => 'Excercise name',
-                'desc' => 'Perhaps the most famous calisthenics exercise',
-            ],
-            [
                 'name' => 'Pushups',
-                'desc' => 'desription description',
+                'desc' => 'Targets pectorals, triceps, and shoulders, but engages almost every muscle in our body.',
             ],
             [
                 'name' => 'Squats',
-                'desc' => 'desription description',
+                'desc' => 'Progressive squats work entire lower body—targeting the quads, hamstrings, glutes, and calves.',
 
             ],
             [
                 'name' => 'Pullups',
-                'desc' => 'desription description',
+                'desc' => 'Pulling and climbing are some of the most fundamental human movements.',
 
             ],
             [
                 'name' => 'Bridges',
-                'desc' => 'desription description',
+                'desc' => 'Trains spinal mobility and reverse the effects of sitting',
 
             ],
             [
                 'name' => 'Twist Holds',
-                'desc' => 'desription description',
+                'desc' => 'Regular twist holds help eliminate muscle imbalance and train the sides of our body.',
             ],
             [
                 'name' => 'Leg Raises',
-                'desc' => 'desription description',
+                'desc' => 'Not only do these strengthen your abdomen, but they build powerful, mobile hip flexors as well.',
             ], [
                 'name' => 'stretching',
                 'desc' => 'relax and stretch',

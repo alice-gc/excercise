@@ -16,9 +16,7 @@ class _BackNextButtonState extends State<BackNextButton> {
   Widget build(BuildContext context) {
     return Container(
       width: 150,
-      child: RaisedButton(
-        color: Colors.blue,
-        textColor: Colors.white,
+      child: ElevatedButton(
         child: Text(widget.title),
         onPressed: widget.selectHandler,
       ),
@@ -30,14 +28,12 @@ class NextSave extends StatelessWidget {
   final VoidCallback selectHandler;
   final String next;
 
-  NextSave(this.selectHandler, this.next);
+  const NextSave(this.selectHandler, this.next);
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 150,
-      child: RaisedButton(
-        color: Colors.blue,
-        textColor: Colors.white,
+      child: ElevatedButton(
         child: Text(next),
         onPressed: selectHandler,
       ),

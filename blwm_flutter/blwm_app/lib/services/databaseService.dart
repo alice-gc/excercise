@@ -22,6 +22,19 @@ class ExerciseListing {
 
     data = json.decode(response.data);
 
+    // print(data);
+
+    return data;
+  }
+
+  Future<List<dynamic>> getAllForUser() async {
+    List<dynamic> data;
+
+    Dio.Response response = await dio().get("/list/exercises/user",
+        options: Dio.Options(headers: {'auth': true}));
+
+    data = json.decode(response.data);
+
     print(data);
 
     return data;
@@ -33,7 +46,7 @@ class ExerciseListingByDay {
     List<dynamic> data = [];
     Map send_data = {'day': day};
 
-    print(send_data);
+    // print(send_data);
 
     Dio.Response response = await dio().post("list/exercises/byDay",
         options: Dio.Options(headers: {'auth': true}),
@@ -48,12 +61,12 @@ class ExerciseListingByDay {
     Map send_data = {
       'index': index,
     };
-    print(send_data);
+    // print(send_data);
 
     Dio.Response response = await dio().delete("list/exercises/DeletebyDay",
         options: Dio.Options(headers: {'auth': true}),
         data: json.encode(send_data));
-    print(response.data);
+    // print(response.data);
   }
 }
 
@@ -82,7 +95,7 @@ class SaveExercises {
   void init() async {
     Dio.Response response = await dio()
         .post("/save/init", options: Dio.Options(headers: {'auth': true}));
-    print(response.data);
+    // print(response.data);
   }
 
   void addCustomExercise(String name, String desc) async {
@@ -92,7 +105,7 @@ class SaveExercises {
       'desc': desc,
     };
 
-    print(send_data);
+    // print(send_data);
 
     Dio.Response response = await dio().post("list/exercises/addCustomExercise",
         options: Dio.Options(headers: {'auth': true}),
