@@ -33,12 +33,12 @@ turn on xamp - apache, mySQL
 
 on backend laravel_api
 <your ip6 aadrres here>
-php artisan serve --host  192.168.10.102  --port 8080 
+php artisan serve --host  111.111.11.102  --port 8080 
 
 on flutter change line in lib/dio.dart
-     change this ->  baseUrl: 'http://192.168.10.102:8080/api/',
+     change this ->  baseUrl: 'http://111.111.11.102:8080/api/',
      change this ->  baseUrl: 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
      
      
      <your addres here ip6 same as serving
-     to -> baseUrl: 'http://192.168.10.102:8080/api/',
+     to -> baseUrl: 'http://192.111.111.102:8080/api/',
